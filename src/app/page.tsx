@@ -1,101 +1,129 @@
-import Image from "next/image";
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { Phone, ArrowRight, CalendarCheck } from '@phosphor-icons/react/dist/ssr';
+import fmsData from '@/lib/fmsData';
+import { StatsRow } from '@/components/ui/TrustBadges';
+import ServiceCard from '@/components/cards/ServiceCard';
+import ClinicCard from '@/components/cards/ClinicCard';
+import HeroSection from '@/components/sections/HeroSection';
+import TreatmentTagsSection from '@/components/sections/TreatmentTagsSection';
+import TestimonialsSection from '@/components/sections/TestimonialsSection';
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: 'FMS Dental — World-Class Dental Implants & Smile Makeovers in Hyderabad',
+  description:
+    'FMS Dental: Hyderabad\'s top NABH-accredited dental group with 6 clinics. Expert dental implants, smile makeovers, Invisalign & full mouth rehabilitation. Book online.',
+};
+
+const featuredServices = fmsData.services_and_treatments.slice(0, 6);
+const featuredClinics = fmsData.clinics_and_locations.slice(0, 3);
+
+export default function HomePage() {
+  const { contact_and_appointment_info } = fmsData;
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="overflow-x-hidden">
+      {/* ─── Hero ────────────────────────────────────────────────── */}
+      <HeroSection />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* ─── Stats Strip ─────────────────────────────────────────── */}
+      <StatsRow />
+
+      {/* ─── Treatment Tags ───────────────────────────────────────── */}
+      <TreatmentTagsSection />
+
+      {/* ─── Featured Treatments ─────────────────────────────────── */}
+      <section className="section" style={{ backgroundColor: 'var(--color-bg-alt)' }}>
+        <div className="container-fms">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+            <div>
+              <p className="section-label">Our Treatments</p>
+              <h2 className="section-title">World-Class Dental Care</h2>
+              <p className="section-subtitle">
+                From single-tooth implants to complete smile transformations — every procedure is planned with digital precision.
+              </p>
+            </div>
+            <Link href="/services" className="btn-secondary text-sm shrink-0">
+              All Treatments
+              <ArrowRight size={14} />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {featuredServices.map((service) => (
+              <ServiceCard key={service.id} service={service} />
+            ))}
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
+      </section>
+
+      {/* ─── Trust + CTA Band ─────────────────────────────────────── */}
+      <section className="section" style={{ backgroundColor: 'var(--color-primary)' }}>
+        <div className="container-fms text-center">
+          <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: 'oklch(0.75 0.1 240)' }}>
+            Why Choose FMS Dental
+          </p>
+          <h2 className="text-3xl sm:text-4xl font-semibold text-white mb-4" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.03em', maxWidth: '20ch', margin: '0 auto 1rem' }}>
+            Trusted by 50,000+ Patients Across India & the World
+          </h2>
+          <p className="text-sm mb-8 mx-auto" style={{ color: 'oklch(0.82 0.05 240)', maxWidth: '55ch' }}>
+            NABH-accredited. ISO-certified. Recognised as a Top 10 dental clinic in India by the Global Clinic Rating. Our doctors train internationally and bring world standards to Hyderabad.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link href="/book" className="btn-accent">
+              <CalendarCheck size={18} weight="fill" />
+              Book Appointment
+            </Link>
+            <a href={`tel:${contact_and_appointment_info.primary_phone}`}
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg text-sm font-medium border border-white/30 text-white transition-colors hover:bg-white/10"
+              style={{ fontFamily: 'var(--font-display)' }}>
+              <Phone size={15} weight="fill" />
+              {contact_and_appointment_info.primary_phone}
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Testimonials ─────────────────────────────────────────── */}
+      <TestimonialsSection />
+
+      {/* ─── Locations Teaser ─────────────────────────────────────── */}
+      <section className="section" style={{ backgroundColor: 'var(--color-bg-alt)' }}>
+        <div className="container-fms">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+            <div>
+              <p className="section-label">Our Locations</p>
+              <h2 className="section-title">6 Clinics Across Hyderabad</h2>
+              <p className="section-subtitle">
+                Convenient locations across the city — all with the same NABH-accredited quality.
+              </p>
+            </div>
+            <Link href="/clinics" className="btn-secondary text-sm shrink-0">
+              All Clinics
+              <ArrowRight size={14} />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {featuredClinics.map((clinic) => (
+              <ClinicCard key={clinic.id} clinic={clinic} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Mobile sticky CTA ───────────────────────────────────── */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden border-t bg-white py-3 px-4 flex gap-2"
+        style={{ borderColor: 'var(--color-border)', boxShadow: '0 -2px 12px oklch(0 0 0 / 0.08)' }}>
+        <a href={`tel:${contact_and_appointment_info.primary_phone}`} className="btn-secondary flex-1 text-sm justify-center">
+          <Phone size={15} weight="fill" />
+          Call Now
         </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <Link href="/book" className="btn-primary flex-1 text-sm justify-center">
+          <CalendarCheck size={15} weight="fill" />
+          Book Appointment
+        </Link>
+      </div>
     </div>
   );
 }

@@ -2,26 +2,294 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ============================================================
+   FMS Dental — Design System Tokens
+   Medical Authority + Modern Conversion Aesthetic
+   ============================================================ */
 
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Color System — OKLCH anchored */
+    --color-bg: oklch(0.985 0.003 240);
+    --color-bg-alt: oklch(0.97 0.005 235);
+    --color-surface: oklch(1 0 0);
+    --color-surface-raised: oklch(0.98 0.004 240);
+
+    --color-primary: oklch(0.42 0.16 240);
+    --color-primary-hover: oklch(0.35 0.18 240);
+    --color-primary-light: oklch(0.92 0.04 240);
+    --color-primary-muted: oklch(0.96 0.02 240);
+
+    --color-accent: oklch(0.52 0.14 170);
+    --color-accent-hover: oklch(0.45 0.16 170);
+    --color-accent-light: oklch(0.93 0.04 170);
+
+    --color-gold: oklch(0.68 0.1 75);
+    --color-gold-light: oklch(0.95 0.03 75);
+
+    --color-ink: oklch(0.18 0.015 240);
+    --color-ink-secondary: oklch(0.38 0.01 240);
+    --color-ink-muted: oklch(0.55 0.008 240);
+    --color-ink-placeholder: oklch(0.70 0.005 240);
+
+    --color-border: oklch(0.88 0.006 240);
+    --color-border-strong: oklch(0.78 0.01 240);
+
+    --color-success: oklch(0.52 0.15 155);
+    --color-success-light: oklch(0.94 0.04 155);
+    --color-error: oklch(0.52 0.2 25);
+    --color-error-light: oklch(0.95 0.04 25);
+
+    /* Typography Scale */
+    --font-display: 'Outfit', system-ui, sans-serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    /* Spacing Rhythm */
+    --section-py: 5rem;
+    --section-py-lg: 7rem;
+
+    /* Motion */
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Shadows — tinted to primary hue */
+    --shadow-card: 0 2px 8px -2px oklch(0.42 0.16 240 / 0.08), 0 1px 3px -1px oklch(0.42 0.16 240 / 0.06);
+    --shadow-card-hover: 0 8px 24px -4px oklch(0.42 0.16 240 / 0.14), 0 2px 8px -2px oklch(0.42 0.16 240 / 0.08);
+    --shadow-nav: 0 1px 0 0 var(--color-border);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  p {
+    color: var(--color-ink-secondary);
+    max-width: 65ch;
+    text-wrap: pretty;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
+@layer components {
+  /* ─── Container ───────────────────────────────────────────── */
+  .container-fms {
+    @apply mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8;
+  }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  /* ─── Section ─────────────────────────────────────────────── */
+  .section {
+    @apply py-16 lg:py-24;
+  }
+
+  /* ─── Section Header ──────────────────────────────────────── */
+  .section-label {
+    @apply text-xs font-semibold uppercase tracking-[0.12em] mb-3;
+    color: var(--color-accent);
+  }
+
+  .section-title {
+    @apply text-3xl sm:text-4xl font-semibold mb-4;
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+  }
+
+  .section-subtitle {
+    @apply text-base leading-relaxed;
+    color: var(--color-ink-muted);
+    max-width: 52ch;
+  }
+
+  /* ─── Buttons ─────────────────────────────────────────────── */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-medium text-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+    background-color: var(--color-primary);
+    color: white;
+    font-family: var(--font-display);
+    transition-timing-function: var(--ease-out-expo);
+  }
+  .btn-primary:hover {
+    background-color: var(--color-primary-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-card-hover);
+  }
+  .btn-primary:active {
+    transform: translateY(0) scale(0.98);
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-medium text-sm transition-all duration-200 border focus-visible:outline-none focus-visible:ring-2;
+    border-color: var(--color-border-strong);
+    color: var(--color-ink);
+    background-color: white;
+    font-family: var(--font-display);
+  }
+  .btn-secondary:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background-color: var(--color-primary-muted);
+    transform: translateY(-1px);
+  }
+
+  .btn-accent {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-medium text-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2;
+    background-color: var(--color-accent);
+    color: white;
+    font-family: var(--font-display);
+  }
+  .btn-accent:hover {
+    background-color: var(--color-accent-hover);
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 focus-visible:outline-none;
+    color: var(--color-ink-secondary);
+  }
+  .btn-ghost:hover {
+    background-color: var(--color-primary-muted);
+    color: var(--color-primary);
+  }
+
+  /* ─── Cards ───────────────────────────────────────────────── */
+  .card {
+    @apply rounded-xl border bg-white;
+    border-color: var(--color-border);
+    box-shadow: var(--shadow-card);
+    transition: box-shadow 0.25s var(--ease-out-expo), transform 0.25s var(--ease-out-expo);
+  }
+  .card:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-3px);
+  }
+
+  /* ─── Form Elements ───────────────────────────────────────── */
+  .form-label {
+    @apply block text-sm font-medium mb-1.5;
+    color: var(--color-ink);
+    font-family: var(--font-display);
+  }
+
+  .form-input {
+    @apply block w-full rounded-lg border px-4 py-2.5 text-sm transition-all duration-150 outline-none;
+    border-color: var(--color-border);
+    color: var(--color-ink);
+    background-color: white;
+    font-family: var(--font-body);
+  }
+  .form-input::placeholder {
+    color: var(--color-ink-placeholder);
+  }
+  .form-input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px oklch(0.42 0.16 240 / 0.12);
+  }
+  .form-input:invalid:not(:placeholder-shown) {
+    border-color: var(--color-error);
+  }
+
+  .form-select {
+    @apply form-input appearance-none pr-10;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.75rem center;
+    background-repeat: no-repeat;
+    background-size: 1.25em 1.25em;
+  }
+
+  .form-error {
+    @apply text-xs mt-1.5;
+    color: var(--color-error);
+  }
+
+  /* ─── Badge / Chip ────────────────────────────────────────── */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-primary {
+    @apply badge;
+    background-color: var(--color-primary-muted);
+    color: var(--color-primary);
+  }
+
+  .badge-accent {
+    @apply badge;
+    background-color: var(--color-accent-light);
+    color: var(--color-accent);
+  }
+
+  .badge-gold {
+    @apply badge;
+    background-color: var(--color-gold-light);
+    color: var(--color-gold);
+  }
+
+  .badge-success {
+    @apply badge;
+    background-color: var(--color-success-light);
+    color: var(--color-success);
+  }
+
+  /* ─── Treatment Pill (filter) ─────────────────────────────── */
+  .pill {
+    @apply inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-medium border cursor-pointer transition-all duration-150 select-none;
+    border-color: var(--color-border);
+    color: var(--color-ink-secondary);
+    background-color: white;
+  }
+  .pill:hover, .pill.active {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background-color: var(--color-primary-muted);
+  }
+
+  /* ─── Stats ───────────────────────────────────────────────── */
+  .stat-number {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: var(--color-primary);
+  }
+
+  /* ─── Nav link ────────────────────────────────────────────── */
+  .nav-link {
+    @apply text-sm font-medium transition-colors duration-150 relative;
+    color: var(--color-ink-secondary);
+  }
+  .nav-link:hover {
+    color: var(--color-primary);
+  }
+  .nav-link.active {
+    color: var(--color-primary);
   }
 }
