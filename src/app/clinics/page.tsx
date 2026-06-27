@@ -5,24 +5,41 @@ import { motion } from 'framer-motion';
 import fmsData from '@/lib/fmsData';
 import ClinicCard from '@/components/cards/ClinicCard';
 
+const gridContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05,
+    },
+  },
+} as const;
+
+const gridItemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: 'spring', stiffness: 90, damping: 16 },
+  },
+} as const;
+
 export default function ClinicsPage() {
-  const [cityFilter, setCityFilter] = useState('');
   const [areaFilter, setAreaFilter] = useState('');
 
   const { clinics_and_locations, tagging_dimensions } = fmsData;
 
   const filtered = useMemo(() => {
     return clinics_and_locations.filter((c) => {
-      const matchesCity = !cityFilter || c.city === cityFilter;
       const matchesArea = !areaFilter || c.area.toLowerCase().includes(areaFilter.toLowerCase());
-      return matchesCity && matchesArea;
+      return matchesArea;
     });
-  }, [clinics_and_locations, cityFilter, areaFilter]);
+  }, [clinics_and_locations, areaFilter]);
 
   return (
-    <div className="container-fms py-12">
+    <div className="container-fms py-16 lg:py-24">
       {/* Header */}
-      <div className="mb-10">
+      <div className="mb-12">
         <p className="section-label">Branch Directory</p>
         <h1 className="section-title">Our Clinics</h1>
         <p className="section-subtitle">
@@ -31,10 +48,10 @@ export default function ClinicsPage() {
       </div>
 
       {/* Filters */}
-      <div className="flex flex-wrap gap-3 mb-8">
+      <div className="flex flex-wrap gap-2 mb-10">
         <button
           onClick={() => setAreaFilter('')}
-          className={`pill text-xs ${!areaFilter ? 'active' : ''}`}
+          className={`pill text-[10px] py-1.5 px-4 font-semibold tracking-wider ${!areaFilter ? 'active' : ''}`}
         >
           All Areas
         </button>
@@ -42,7 +59,7 @@ export default function ClinicsPage() {
           <button
             key={area}
             onClick={() => setAreaFilter(areaFilter === area ? '' : area)}
-            className={`pill text-xs ${areaFilter === area ? 'active' : ''}`}
+            className={`pill text-[10px] py-1.5 px-4 font-semibold tracking-wider ${areaFilter === area ? 'active' : ''}`}
           >
             {area}
           </button>
@@ -50,23 +67,27 @@ export default function ClinicsPage() {
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        {filtered.map((clinic, i) => (
-          <motion.div
-            key={clinic.id}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.07, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <ClinicCard clinic={clinic} />
-          </motion.div>
-        ))}
-      </div>
-
-      {filtered.length === 0 && (
-        <div className="text-center py-16">
-          <p className="text-xl font-semibold mb-2" style={{ fontFamily: 'var(--font-display)' }}>No clinics found</p>
-          <button onClick={() => { setCityFilter(''); setAreaFilter(''); }} className="btn-secondary text-sm mt-2">
+      {filtered.length > 0 ? (
+        <motion.div 
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          variants={gridContainerVariants}
+          initial="hidden"
+          animate="visible"
+          key={areaFilter} // Re-animate on filter change
+        >
+          {filtered.map((clinic) => (
+            <motion.div
+              key={clinic.id}
+              variants={gridItemVariants}
+            >
+              <ClinicCard clinic={clinic} />
+            </motion.div>
+          ))}
+        </motion.div>
+      ) : (
+        <div className="text-center py-20 border border-dashed border-[var(--color-border)] rounded-2xl bg-[var(--color-bg-alt)]/25">
+          <p className="text-lg font-medium mb-2 text-[var(--color-ink)]" style={{ fontFamily: 'var(--font-display)' }}>No clinics found</p>
+          <button onClick={() => setAreaFilter('')} className="btn-secondary text-[10px] py-3 px-5 tracking-widest uppercase font-semibold mt-2">
             Clear Filters
           </button>
         </div>

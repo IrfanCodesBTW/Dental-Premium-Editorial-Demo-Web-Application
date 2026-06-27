@@ -37,109 +37,118 @@ export default function ServiceDetailPage({ params }: Props) {
     : null;
 
   return (
-    <div className="container-fms py-12">
-      {/* Breadcrumb */}
-      <nav className="flex items-center gap-2 text-sm mb-8" aria-label="Breadcrumb">
-        <Link href="/services" className="flex items-center gap-1.5 btn-ghost text-xs px-2">
-          <ArrowLeft size={13} />
-          All Services
+    <div className="container-fms py-16 lg:py-24">
+      {/* Breadcrumbs */}
+      <nav className="flex items-center gap-2 text-[10px] uppercase font-bold tracking-widest mb-10" aria-label="Breadcrumb">
+        <Link href="/services" className="flex items-center gap-1.5 hover:text-[var(--color-primary)] transition-colors">
+          <ArrowLeft size={12} />
+          <span>All Services</span>
         </Link>
         <span style={{ color: 'var(--color-border-strong)' }}>/</span>
-        <span className="text-xs" style={{ color: 'var(--color-ink-muted)' }}>{service.name}</span>
+        <span className="text-slate-400 select-none">{service.name}</span>
       </nav>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-        {/* ─── Main Content ──────────────────────────────── */}
-        <div className="lg:col-span-2 space-y-10">
-          {/* Hero image + header */}
-          <div>
-            <div className="rounded-xl overflow-hidden mb-6" style={{ aspectRatio: '16/7' }}>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+        
+        {/* ─── Main Content Column (Asymmetric Width: 8 cols) ─── */}
+        <div className="lg:col-span-8 space-y-12">
+          
+          {/* Main Visual Banner */}
+          <div className="space-y-6">
+            <div className="rounded-3xl overflow-hidden shadow-sm border border-[var(--color-border)] aspect-[21/9] bg-slate-100">
               <img
                 src={`https://picsum.photos/seed/${service.image_keyword}/1200/525`}
                 alt={service.name}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover grayscale brightness-95"
                 loading="eager"
               />
             </div>
 
-            <span className="badge-primary text-xs mb-3">{service.category}</span>
-            <h1 className="text-3xl sm:text-4xl font-semibold mb-4"
-              style={{ fontFamily: 'var(--font-display)', color: 'var(--color-ink)', letterSpacing: '-0.03em' }}>
-              {service.name}
-            </h1>
-            <p className="text-base leading-relaxed" style={{ color: 'var(--color-ink-secondary)' }}>
-              {service.short_description}
-            </p>
+            <div className="space-y-4">
+              <span className="badge-primary text-[9px] py-1 px-3 rounded-full font-semibold tracking-wider uppercase inline-block">
+                {service.category}
+              </span>
+              <h1 className="text-3xl sm:text-5xl font-medium tracking-tight text-[var(--color-ink)]"
+                style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.04em' }}>
+                {service.name}
+              </h1>
+              <p className="text-base leading-relaxed text-slate-600">
+                {service.short_description}
+              </p>
+            </div>
           </div>
 
-          {/* Overview */}
-          <div>
-            <h2 className="text-xl font-semibold mb-3" style={{ fontFamily: 'var(--font-display)', color: 'var(--color-ink)' }}>
-              Overview
+          {/* Detailed Treatment Overview */}
+          <div className="pt-6 border-t border-[var(--color-border)]">
+            <h2 className="text-xs font-semibold uppercase tracking-[0.16em] mb-4 text-[var(--color-ink)]" style={{ fontFamily: 'var(--font-display)' }}>
+              Clinical Overview
             </h2>
-            <p className="text-sm leading-relaxed" style={{ color: 'var(--color-ink-secondary)', maxWidth: '65ch' }}>
+            <p className="text-sm leading-relaxed text-slate-500 max-w-[65ch]">
               {service.detailed_description}
             </p>
           </div>
 
-          {/* Benefits */}
-          <div>
-            <h2 className="text-xl font-semibold mb-4" style={{ fontFamily: 'var(--font-display)', color: 'var(--color-ink)' }}>
-              Key Benefits
+          {/* Benefits Bullet Grid */}
+          <div className="pt-6 border-t border-[var(--color-border)]">
+            <h2 className="text-xs font-semibold uppercase tracking-[0.16em] mb-6 text-[var(--color-ink)]" style={{ fontFamily: 'var(--font-display)' }}>
+              Treatment Benefits
             </h2>
-            <ul className="space-y-3">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {service.benefits.map((benefit) => (
                 <li key={benefit} className="flex items-start gap-3">
-                  <CheckCircle size={18} weight="fill" className="shrink-0 mt-0.5" style={{ color: 'var(--color-success)' }} />
-                  <span className="text-sm" style={{ color: 'var(--color-ink-secondary)' }}>{benefit}</span>
+                  <CheckCircle size={18} weight="fill" className="shrink-0 mt-0.5 text-emerald-500" />
+                  <span className="text-xs font-medium text-slate-600 leading-relaxed">{benefit}</span>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Ideal For */}
-          <div>
-            <h2 className="text-xl font-semibold mb-4" style={{ fontFamily: 'var(--font-display)', color: 'var(--color-ink)' }}>
-              Ideal For
+          {/* Patient Onboarding Fit Criteria */}
+          <div className="pt-6 border-t border-[var(--color-border)]">
+            <h2 className="text-xs font-semibold uppercase tracking-[0.16em] mb-6 text-[var(--color-ink)]" style={{ fontFamily: 'var(--font-display)' }}>
+              Ideal Candidacy
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {service.ideal_for.map((item) => (
-                <div key={item} className="flex items-start gap-2.5 p-3 rounded-lg"
-                  style={{ backgroundColor: 'var(--color-primary-muted)' }}>
-                  <CheckCircle size={15} weight="fill" className="shrink-0 mt-0.5" style={{ color: 'var(--color-primary)' }} />
-                  <span className="text-sm" style={{ color: 'var(--color-ink)' }}>{item}</span>
+                <div key={item} className="flex items-start gap-3 p-4 rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-alt)]/30">
+                  <CheckCircle size={15} weight="fill" className="shrink-0 mt-0.5 text-[var(--color-primary)]" />
+                  <span className="text-xs font-medium text-slate-600 leading-snug">{item}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Related Technology */}
+          {/* Related Technology Spotlight */}
           {relatedTech.length > 0 && (
-            <div>
-              <h2 className="text-xl font-semibold mb-4" style={{ fontFamily: 'var(--font-display)', color: 'var(--color-ink)' }}>
-                <span className="flex items-center gap-2"><Cpu size={18} style={{ color: 'var(--color-accent)' }} /> Technology We Use</span>
+            <div className="pt-6 border-t border-[var(--color-border)]">
+              <h2 className="text-xs font-semibold uppercase tracking-[0.16em] mb-6 text-[var(--color-ink)] flex items-center gap-2" style={{ fontFamily: 'var(--font-display)' }}>
+                <Cpu size={16} className="text-[var(--color-accent)]" />
+                <span>Advanced Clinical Technology</span>
               </h2>
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {relatedTech.map((tech) => (
-                  <div key={tech.id} className="card p-4">
-                    <h3 className="font-semibold text-sm mb-1" style={{ fontFamily: 'var(--font-display)', color: 'var(--color-ink)' }}>
+                  <div key={tech.id} className="card p-5 hover:border-[var(--color-primary)]">
+                    <h3 className="font-semibold text-xs mb-1 text-[var(--color-ink)]" style={{ fontFamily: 'var(--font-display)' }}>
                       {tech.name}
                     </h3>
-                    <p className="text-xs mb-2" style={{ color: 'var(--color-ink-muted)' }}>{tech.description}</p>
-                    <p className="text-xs font-medium" style={{ color: 'var(--color-accent)' }}>✓ {tech.benefit}</p>
+                    <p className="text-[11px] text-slate-500 mb-3 leading-relaxed">{tech.description}</p>
+                    <p className="text-[10px] font-semibold text-[var(--color-accent)] uppercase tracking-wider">
+                      ✓ Clinical Benefit: {tech.benefit}
+                    </p>
                   </div>
                 ))}
               </div>
             </div>
           )}
 
-          {/* Related Doctors */}
+          {/* Related Specialists */}
           {relatedDoctors.length > 0 && (
-            <div>
-              <h2 className="text-xl font-semibold mb-4" style={{ fontFamily: 'var(--font-display)', color: 'var(--color-ink)' }}>
-                <span className="flex items-center gap-2"><UserCircle size={18} style={{ color: 'var(--color-primary)' }} /> Our Specialists</span>
+            <div className="pt-6 border-t border-[var(--color-border)]">
+              <h2 className="text-xs font-semibold uppercase tracking-[0.16em] mb-6 text-[var(--color-ink)] flex items-center gap-2" style={{ fontFamily: 'var(--font-display)' }}>
+                <UserCircle size={16} className="text-[var(--color-primary)]" />
+                <span>Specialists Associated</span>
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {relatedDoctors.map((doctor) => (
                   <DoctorCard key={doctor.id} doctor={doctor} />
                 ))}
@@ -148,60 +157,76 @@ export default function ServiceDetailPage({ params }: Props) {
           )}
         </div>
 
-        {/* ─── Sidebar ──────────────────────────────────── */}
-        <div className="space-y-5">
-          {/* Book CTA */}
-          <div className="card p-6 sticky top-20">
-            <h3 className="font-semibold text-base mb-2" style={{ fontFamily: 'var(--font-display)', color: 'var(--color-ink)' }}>
-              Book This Treatment
+        {/* ─── Sidebar Column (Asymmetric Width: 4 cols) ─────── */}
+        <div className="lg:col-span-4 space-y-6">
+          
+          {/* Booking Request Card */}
+          <div className="card p-6 border border-[var(--color-border)] bg-white sticky top-24">
+            <h3 className="font-semibold text-sm mb-2 text-[var(--color-ink)]" style={{ fontFamily: 'var(--font-display)' }}>
+              Consultation Intake
             </h3>
-            <p className="text-xs mb-5" style={{ color: 'var(--color-ink-muted)' }}>
-              Schedule a consultation with our specialists. First consultation is complimentary.
+            <p className="text-[11px] text-slate-500 mb-6 leading-relaxed">
+              Schedule your digital diagnostic assessment. Your first clinical review is complimentary.
             </p>
-            <Link
-              href={`/book?service=${service.id}`}
-              className="btn-primary w-full justify-center mb-3 text-sm"
-              id={`book-${service.id}`}
-            >
-              <CalendarCheck size={16} weight="fill" />
-              Book Appointment
-            </Link>
-            <a
-              href={`tel:${fmsData.contact_and_appointment_info.primary_phone}`}
-              className="btn-secondary w-full justify-center text-sm"
-            >
-              Call Us Now
-            </a>
+            <div className="space-y-3">
+              <Link
+                href={`/book?service=${service.id}`}
+                className="btn-primary w-full justify-center text-[10px] py-3.5 tracking-wider font-semibold uppercase"
+                id={`book-${service.id}`}
+              >
+                <CalendarCheck size={14} weight="fill" />
+                <span>Request Appointment</span>
+              </Link>
+              <a
+                href={`tel:${fmsData.contact_and_appointment_info.primary_phone}`}
+                className="btn-secondary w-full justify-center text-[10px] py-3.5 tracking-wider font-semibold uppercase"
+              >
+                <span>Call Clinic Directly</span>
+              </a>
+            </div>
           </div>
 
-          {/* Pricing insight */}
+          {/* Dynamic Comparative Pricing Chart */}
           {pricing && (
-            <div className="card p-5">
-              <h3 className="font-semibold text-sm mb-3 flex items-center gap-2"
-                style={{ fontFamily: 'var(--font-display)', color: 'var(--color-ink)' }}>
-                <CurrencyInr size={15} style={{ color: 'var(--color-gold)' }} />
-                Pricing Insight
+            <div className="card p-6 border border-[var(--color-border)] bg-white">
+              <h3 className="font-semibold text-xs mb-4 flex items-center gap-2 text-[var(--color-ink)]"
+                style={{ fontFamily: 'var(--font-display)' }}>
+                <CurrencyInr size={14} className="text-[var(--color-gold)]" />
+                <span>Comparative Pricing</span>
               </h3>
-              <div className="space-y-3 mb-3">
-                <div className="p-3 rounded-lg" style={{ backgroundColor: 'var(--color-primary-muted)' }}>
-                  <p className="text-[10px] font-semibold uppercase tracking-wider mb-1" style={{ color: 'var(--color-primary)' }}>At FMS Dental (India)</p>
-                  <p className="text-lg font-bold" style={{ fontFamily: 'var(--font-display)', color: 'var(--color-primary)' }}>
-                    {pricing.india_range}
-                  </p>
+              
+              <div className="space-y-5">
+                {/* India Price Bar */}
+                <div className="space-y-2">
+                  <div className="flex justify-between items-end">
+                    <span className="text-[10px] font-semibold text-[var(--color-primary)] uppercase tracking-wider">FMS Dental (India)</span>
+                    <span className="text-xs font-bold text-[var(--color-primary)] font-mono">{pricing.india_range}</span>
+                  </div>
+                  <div className="h-3 w-full bg-[var(--color-primary-muted)] rounded-full overflow-hidden border border-[var(--color-primary-light)]">
+                    <div className="h-full bg-[var(--color-primary)] rounded-full" style={{ width: '30%' }} />
+                  </div>
                 </div>
-                <div className="p-3 rounded-lg" style={{ backgroundColor: 'var(--color-bg-alt)' }}>
-                  <p className="text-[10px] font-semibold uppercase tracking-wider mb-1" style={{ color: 'var(--color-ink-muted)' }}>Globally (USA/UK)</p>
-                  <p className="text-base font-semibold line-through" style={{ fontFamily: 'var(--font-display)', color: 'var(--color-ink-muted)' }}>
-                    {pricing.global_range}
-                  </p>
+
+                {/* Global Price Bar */}
+                <div className="space-y-2">
+                  <div className="flex justify-between items-end">
+                    <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Western Cost (US/UK)</span>
+                    <span className="text-xs font-bold text-slate-500 font-mono line-through">{pricing.global_range}</span>
+                  </div>
+                  <div className="h-3 w-full bg-slate-100 rounded-full overflow-hidden border border-slate-200">
+                    <div className="h-full bg-slate-400 rounded-full" style={{ width: '100%' }} />
+                  </div>
                 </div>
+
+                {/* Arbitrage Savings */}
+                <div className="p-3.5 rounded-2xl bg-emerald-50 border border-emerald-100 text-emerald-800 text-[10px] font-semibold text-center uppercase tracking-wider">
+                  {pricing.savings_note}
+                </div>
+
+                <p className="text-[9px] text-slate-400 leading-snug">
+                  * {pricing.disclaimer}
+                </p>
               </div>
-              <p className="text-xs font-medium mb-2" style={{ color: 'var(--color-success)' }}>
-                {pricing.savings_note}
-              </p>
-              <p className="text-[10px]" style={{ color: 'var(--color-ink-muted)' }}>
-                * {pricing.disclaimer}
-              </p>
             </div>
           )}
         </div>

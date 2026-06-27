@@ -17,61 +17,62 @@ export default function DoctorCard({ doctor }: DoctorCardProps) {
 
   return (
     <motion.div
-      className="card overflow-hidden flex flex-col h-full"
-      whileHover={{ y: -3 }}
-      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+      className="card flex flex-col h-full border border-[var(--color-border)] hover:border-slate-300 bg-white"
+      whileHover={{ y: -5, scale: 1.01 }}
+      transition={{ type: 'spring', stiffness: 100, damping: 18 }}
     >
-      {/* Doctor image */}
-      <div className="flex items-center gap-4 p-5 pb-0">
-        <div className="w-16 h-16 rounded-xl overflow-hidden shrink-0 border-2" style={{ borderColor: 'var(--color-primary-light)' }}>
+      {/* Doctor profile card header */}
+      <div className="flex items-center gap-4 p-6 pb-4 border-b border-[var(--color-border)] bg-[var(--color-bg-alt)]/30">
+        <div className="w-16 h-16 rounded-2xl overflow-hidden shrink-0 border border-[var(--color-border-strong)] bg-slate-100">
           <img
             src={`https://picsum.photos/seed/${doctor.image_seed}/150/150`}
             alt={doctor.name}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover grayscale brightness-95 contrast-105 transition-all duration-500 hover:grayscale-0"
             loading="lazy"
           />
         </div>
-        <div>
-          <h3 className="font-semibold text-base leading-tight" style={{ fontFamily: 'var(--font-display)', color: 'var(--color-ink)' }}>
+        <div className="min-w-0">
+          <h3 className="font-semibold text-sm leading-tight text-[var(--color-ink)] truncate" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}>
             {doctor.name}
           </h3>
-          <p className="text-xs mt-0.5" style={{ color: 'var(--color-ink-muted)' }}>
+          <p className="text-[10px] font-medium text-slate-500 uppercase tracking-wider mt-1 truncate">
             {doctor.designation}
           </p>
-          <p className="text-xs font-medium mt-1" style={{ color: 'var(--color-primary)' }}>
-            {doctor.experience_years} years experience
+          <p className="text-[10px] font-semibold text-[var(--color-primary)] mt-1.5 font-mono">
+            {doctor.experience_years} Years Experience
           </p>
         </div>
       </div>
 
-      {/* Content */}
-      <div className="p-5 flex flex-col flex-1">
-        {/* Specialties */}
-        <div className="flex flex-wrap gap-1.5 mb-3">
+      {/* Card body content */}
+      <div className="p-6 flex flex-col flex-1 space-y-4">
+        {/* Specialties list */}
+        <div className="flex flex-wrap gap-1.5">
           {doctor.specialties.slice(0, 3).map((specialty) => (
-            <span key={specialty} className="badge-primary text-[10px]">
-              <Stethoscope size={9} />
+            <span key={specialty} className="badge-primary text-[9px] py-0.5 px-2.5 rounded-full flex items-center gap-1 font-semibold tracking-wider uppercase">
+              <Stethoscope size={10} className="shrink-0" />
               {specialty}
             </span>
           ))}
         </div>
 
-        {/* Bio */}
-        <p className="text-sm leading-relaxed flex-1 mb-3" style={{ color: 'var(--color-ink-muted)' }}>
-          {doctor.bio.slice(0, 120)}...
+        {/* Biography excerpt */}
+        <p className="text-xs leading-relaxed text-slate-500 flex-1 line-clamp-3">
+          {doctor.bio}
         </p>
 
-        {/* Qualifications */}
-        <div className="flex items-start gap-1.5 mb-3">
-          <GraduationCap size={13} weight="fill" className="shrink-0 mt-0.5" style={{ color: 'var(--color-accent)' }} />
-          <p className="text-xs" style={{ color: 'var(--color-ink-secondary)' }}>
-            {doctor.qualifications[0]}
-          </p>
+        {/* Primary Qualification */}
+        <div className="flex items-start gap-2 pt-2 text-[10px] font-medium text-slate-600">
+          <GraduationCap size={15} weight="fill" className="shrink-0 text-slate-400 mt-0.5" />
+          <span>{doctor.qualifications[0]}</span>
         </div>
 
-        {/* Clinics */}
-        <div className="text-xs px-3 py-2 rounded-lg" style={{ backgroundColor: 'var(--color-bg-alt)', color: 'var(--color-ink-muted)' }}>
-          Available at: <span className="font-medium" style={{ color: 'var(--color-ink)' }}>{clinicNames.join(', ')}</span>
+        {/* Location Availability List */}
+        <div className="text-[10px] px-3.5 py-2.5 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-alt)]/40 text-slate-500 mt-2">
+          Available at:{' '}
+          <span className="font-semibold text-[var(--color-ink)]">
+            {clinicNames.join(', ')}
+          </span>
         </div>
       </div>
     </motion.div>

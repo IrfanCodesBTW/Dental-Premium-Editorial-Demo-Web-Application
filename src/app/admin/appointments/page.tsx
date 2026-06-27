@@ -6,7 +6,7 @@ import { supabase } from '@/lib/supabase';
 import { AppointmentWithPatient, AppointmentStatus } from '@/types';
 import { getStatusColor } from '@/lib/helpers';
 import fmsData from '@/lib/fmsData';
-import { SignOut, FunnelSimple, ArrowClockwise, CalendarBlank, Buildings, CheckCircle } from '@phosphor-icons/react';
+import { SignOut, FunnelSimple, ArrowClockwise, CalendarBlank, Buildings, CheckCircle, Warning, SpinnerGap } from '@phosphor-icons/react';
 
 const STATUS_OPTIONS: { value: AppointmentStatus | ''; label: string }[] = [
   { value: '', label: 'All Status' },
@@ -64,7 +64,7 @@ export default function AdminAppointmentsPage() {
         setError(data.error || 'Failed to load appointments');
       }
     } catch {
-      setError('Network error. Please try again.');
+      setError('Network error. Failed to retrieve dataset.');
     } finally {
       setLoading(false);
     }
@@ -101,7 +101,7 @@ export default function AdminAppointmentsPage() {
   const getClinicName = (id: string) => clinics_and_locations.find((c) => c.id === id)?.area || id;
   const getServiceName = (id: string) => fmsData.services_and_treatments.find((s) => s.id === id)?.name || id;
 
-  // Stats
+  // Statistics
   const stats = {
     total: appointments.length,
     new: appointments.filter((a) => a.status === 'new').length,
@@ -110,57 +110,70 @@ export default function AdminAppointmentsPage() {
   };
 
   return (
-    <div className="container-fms py-8">
-      {/* Page header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+    <div className="container-fms py-10 space-y-8 select-none">
+      {/* Page Header Cockpit */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[var(--color-border)]">
         <div>
-          <h1 className="text-2xl font-semibold" style={{ fontFamily: 'var(--font-display)', color: 'var(--color-ink)' }}>
-            Appointments
+          <h1 className="text-xl font-semibold text-[var(--color-ink)]" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}>
+            Clinical Registry
           </h1>
-          <p className="text-sm mt-0.5" style={{ color: 'var(--color-ink-muted)' }}>
-            {stats.total} total · {stats.new} new · {stats.confirmed} confirmed
-          </p>
+          <div className="flex items-center gap-2 mt-1.5 text-xs text-slate-400 font-mono">
+            <span>{stats.total} logged</span>
+            <span>·</span>
+            <span className="text-[var(--color-primary)]">{stats.new} pending</span>
+            <span>·</span>
+            <span className="text-emerald-500">{stats.confirmed} active</span>
+          </div>
         </div>
-        <div className="flex items-center gap-2">
-          <button onClick={fetchAppointments} className="btn-ghost text-sm" aria-label="Refresh appointments">
-            <ArrowClockwise size={15} />
-            Refresh
+        
+        <div className="flex items-center gap-3">
+          <button 
+            onClick={fetchAppointments} 
+            className="btn-secondary text-[9px] font-bold tracking-wider py-2.5 px-4 flex items-center gap-1.5 hover:bg-slate-50"
+            aria-label="Sync registry data"
+          >
+            <ArrowClockwise size={12} />
+            <span>Sync</span>
           </button>
-          <button onClick={handleSignOut} className="btn-secondary text-sm">
-            <SignOut size={15} />
-            Sign Out
+          <button 
+            onClick={handleSignOut} 
+            className="btn-primary text-[9px] font-bold tracking-wider py-2.5 px-4 flex items-center gap-1.5"
+          >
+            <SignOut size={12} />
+            <span>Lock Console</span>
           </button>
         </div>
       </div>
 
-      {/* Stats cards */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+      {/* Cockpit Numerical Stats Row (Desaturated, no boxes) */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-2">
         {[
-          { label: 'Total', value: stats.total, color: 'var(--color-ink)' },
-          { label: 'New', value: stats.new, color: 'var(--color-primary)' },
-          { label: 'Confirmed', value: stats.confirmed, color: 'var(--color-success)' },
-          { label: 'Completed', value: stats.completed, color: 'var(--color-ink-muted)' },
+          { label: 'Total Enquiries', value: stats.total, color: 'text-slate-700' },
+          { label: 'Pending Review', value: stats.new, color: 'text-[var(--color-primary)]' },
+          { label: 'Confirmed Slots', value: stats.confirmed, color: 'text-emerald-600' },
+          { label: 'Completed Care', value: stats.completed, color: 'text-slate-400' },
         ].map(({ label, value, color }) => (
-          <div key={label} className="card p-4">
-            <p className="text-2xl font-bold mb-1" style={{ fontFamily: 'var(--font-display)', color }}>
+          <div key={label} className="border-l border-[var(--color-border)] pl-4 py-1.5">
+            <p className={`text-2xl font-bold font-mono ${color} leading-none`}>
               {value}
             </p>
-            <p className="text-xs" style={{ color: 'var(--color-ink-muted)' }}>{label}</p>
+            <p className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mt-2">{label}</p>
           </div>
         ))}
       </div>
 
-      {/* Filters */}
-      <div className="card p-4 mb-6">
-        <div className="flex items-center gap-2 mb-3">
-          <FunnelSimple size={15} style={{ color: 'var(--color-ink-muted)' }} />
-          <span className="text-sm font-medium" style={{ color: 'var(--color-ink)' }}>Filters</span>
+      {/* Advanced Filter Panel */}
+      <div className="card p-5 border border-[var(--color-border)] bg-white">
+        <div className="flex items-center gap-2 mb-4">
+          <FunnelSimple size={15} className="text-slate-400" />
+          <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--color-ink)]">Query Filters</span>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value as AppointmentStatus | '')}
-            className="form-select text-sm"
+            className="form-select text-xs font-semibold tracking-wide uppercase py-3.5 pl-4 pr-10"
             aria-label="Filter by status"
             id="status-filter"
           >
@@ -172,7 +185,7 @@ export default function AdminAppointmentsPage() {
           <select
             value={clinicFilter}
             onChange={(e) => setClinicFilter(e.target.value)}
-            className="form-select text-sm"
+            className="form-select text-xs font-semibold tracking-wide uppercase py-3.5 pl-4 pr-10"
             aria-label="Filter by clinic"
             id="admin-clinic-filter"
           >
@@ -182,14 +195,14 @@ export default function AdminAppointmentsPage() {
             ))}
           </select>
 
-          <div className="flex items-center gap-1.5">
-            <CalendarBlank size={14} style={{ color: 'var(--color-ink-muted)' }} />
+          <div className="relative">
+            <CalendarBlank size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
             <input
               type="date"
               value={dateFrom}
               onChange={(e) => setDateFrom(e.target.value)}
-              className="form-input text-sm"
-              aria-label="Date from"
+              className="form-input text-xs pl-11 py-3.5 font-semibold uppercase tracking-wide"
+              aria-label="Start date filter"
               id="date-from"
             />
           </div>
@@ -198,105 +211,110 @@ export default function AdminAppointmentsPage() {
             type="date"
             value={dateTo}
             onChange={(e) => setDateTo(e.target.value)}
-            className="form-input text-sm"
-            aria-label="Date to"
+            className="form-input text-xs py-3.5 font-semibold uppercase tracking-wide"
+            aria-label="End date filter"
             id="date-to"
           />
         </div>
       </div>
 
-      {/* Error */}
+      {/* Error Output banner */}
       {error && (
-        <div className="p-4 rounded-lg mb-6 text-sm"
-          style={{ backgroundColor: 'var(--color-error-light)', color: 'var(--color-error)' }}
-          role="alert">
-          {error}
+        <div className="p-4 rounded-xl text-xs font-semibold uppercase tracking-wide bg-red-50 text-red-700 border border-red-100 flex items-center gap-2" role="alert">
+          <Warning size={16} />
+          <span>{error}</span>
         </div>
       )}
 
-      {/* Table */}
+      {/* Data Table Grid */}
       {loading ? (
-        <div className="card p-12 text-center">
-          <div className="w-8 h-8 border-2 border-t-transparent rounded-full animate-spin mx-auto mb-3"
-            style={{ borderColor: 'var(--color-primary)', borderTopColor: 'transparent' }} />
-          <p className="text-sm" style={{ color: 'var(--color-ink-muted)' }}>Loading appointments...</p>
+        <div className="card py-20 text-center border border-[var(--color-border)]">
+          <SpinnerGap size={24} className="animate-spin text-[var(--color-primary)] mx-auto mb-3" />
+          <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Syncing registry dataset...</p>
         </div>
       ) : appointments.length === 0 ? (
-        <div className="card p-12 text-center">
-          <Buildings size={32} className="mx-auto mb-3" style={{ color: 'var(--color-ink-muted)' }} />
-          <p className="text-sm font-medium" style={{ color: 'var(--color-ink)' }}>No appointments found</p>
-          <p className="text-xs mt-1" style={{ color: 'var(--color-ink-muted)' }}>Try adjusting your filters</p>
+        <div className="card py-20 text-center border border-[var(--color-border)] space-y-2">
+          <Buildings size={28} className="mx-auto text-slate-300" />
+          <p className="text-xs font-semibold text-[var(--color-ink)]">No Registry Rows Located</p>
+          <p className="text-[9px] uppercase tracking-wider text-slate-400">Adjust the filters above</p>
         </div>
       ) : (
-        <div className="card overflow-hidden">
+        <div className="card border border-[var(--color-border)] bg-white overflow-hidden shadow-sm">
           <div className="overflow-x-auto">
-            <table className="w-full text-sm" aria-label="Appointments table">
+            <table className="w-full text-left" aria-label="Appointments Table Console">
               <thead>
-                <tr style={{ backgroundColor: 'var(--color-bg-alt)', borderBottom: '1px solid var(--color-border)' }}>
-                  {['Patient', 'Contact', 'Clinic', 'Treatment', 'Date', 'Time', 'Status', 'Actions'].map((h) => (
-                    <th key={h} className="px-4 py-3 text-left text-xs font-semibold" style={{ color: 'var(--color-ink-secondary)', fontFamily: 'var(--font-display)' }}>
+                <tr className="bg-[var(--color-bg-alt)] border-b border-[var(--color-border)]">
+                  {['Patient Name', 'Contact Info', 'Clinic Branch', 'Treatment Needed', 'Date Requested', 'Preferred Slot', 'Current Status', 'Status Updates'].map((h) => (
+                    <th key={h} className="px-5 py-4 text-[9px] font-bold uppercase tracking-widest text-slate-500">
                       {h}
                     </th>
                   ))}
                 </tr>
               </thead>
-              <tbody>
-                {appointments.map((appt, i) => (
-                  <tr key={appt.id}
-                    style={{
-                      borderBottom: i < appointments.length - 1 ? '1px solid var(--color-border)' : 'none',
-                      backgroundColor: i % 2 === 0 ? 'white' : 'var(--color-bg)',
-                    }}>
-                    <td className="px-4 py-3">
-                      <p className="font-medium text-xs" style={{ color: 'var(--color-ink)', fontFamily: 'var(--font-display)' }}>
-                        {appt.patient?.full_name || '—'}
-                      </p>
+              <tbody className="divide-y divide-[var(--color-border)] text-xs">
+                {appointments.map((appt) => (
+                  <tr key={appt.id} className="hover:bg-slate-50/50 transition-colors">
+                    {/* Patient Name */}
+                    <td className="px-5 py-4 font-semibold text-[var(--color-ink)]">
+                      {appt.patient?.full_name || '—'}
                     </td>
-                    <td className="px-4 py-3">
-                      <p className="text-xs" style={{ color: 'var(--color-ink-secondary)' }}>{appt.patient?.phone}</p>
+                    
+                    {/* Contact details */}
+                    <td className="px-5 py-4 font-mono text-slate-500 leading-snug">
+                      <div>{appt.patient?.phone}</div>
                       {appt.patient?.email && (
-                        <p className="text-[10px]" style={{ color: 'var(--color-ink-muted)' }}>{appt.patient.email}</p>
+                        <div className="text-[9px] text-slate-400 lowercase">{appt.patient.email}</div>
                       )}
                     </td>
-                    <td className="px-4 py-3">
-                      <p className="text-xs" style={{ color: 'var(--color-ink-secondary)' }}>{getClinicName(appt.clinic_id)}</p>
+                    
+                    {/* Clinic Branch */}
+                    <td className="px-5 py-4 text-slate-600 font-medium">
+                      {getClinicName(appt.clinic_id)}
                     </td>
-                    <td className="px-4 py-3">
-                      <p className="text-xs" style={{ color: 'var(--color-ink-secondary)' }}>{getServiceName(appt.service_id)}</p>
+                    
+                    {/* Treatment */}
+                    <td className="px-5 py-4 text-slate-600 font-medium">
+                      {getServiceName(appt.service_id)}
                     </td>
-                    <td className="px-4 py-3">
-                      <p className="text-xs" style={{ color: 'var(--color-ink-secondary)' }}>
-                        {new Date(appt.preferred_date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: '2-digit' })}
-                      </p>
+                    
+                    {/* Date */}
+                    <td className="px-5 py-4 font-mono text-slate-500">
+                      {new Date(appt.preferred_date).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}
                     </td>
-                    <td className="px-4 py-3">
-                      <p className="text-xs" style={{ color: 'var(--color-ink-secondary)' }}>{appt.preferred_time_slot}</p>
+                    
+                    {/* Time Slot */}
+                    <td className="px-5 py-4 font-mono text-slate-500">
+                      {appt.preferred_time_slot}
                     </td>
-                    <td className="px-4 py-3">
-                      <span className={`badge text-[10px] ${getStatusColor(appt.status)}`}>
+                    
+                    {/* Status Badge */}
+                    <td className="px-5 py-4">
+                      <span className={`badge text-[9px] tracking-widest uppercase font-bold py-1 px-3 ${getStatusColor(appt.status)}`}>
                         {appt.status}
                       </span>
                     </td>
-                    <td className="px-4 py-3">
-                      <div className="flex items-center gap-1.5">
+                    
+                    {/* Action Transitions */}
+                    <td className="px-5 py-4">
+                      <div className="flex items-center gap-2">
                         {STATUS_TRANSITIONS[appt.status].map((nextStatus) => (
                           <button
                             key={nextStatus}
                             onClick={() => updateStatus(appt.id, nextStatus)}
                             disabled={updating === appt.id}
-                            className="text-[10px] font-semibold px-2 py-1 rounded-md border transition-colors disabled:opacity-50"
+                            className="text-[9px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-full border transition-all duration-300 disabled:opacity-50"
                             style={{
                               borderColor: nextStatus === 'cancelled' ? 'var(--color-error)' : 'var(--color-success)',
                               color: nextStatus === 'cancelled' ? 'var(--color-error)' : 'var(--color-success)',
                             }}
                             aria-label={`Mark as ${nextStatus}`}
                           >
-                            {nextStatus === 'confirmed' && <CheckCircle size={10} className="inline mr-0.5" />}
-                            {nextStatus}
+                            {nextStatus === 'confirmed' && <CheckCircle size={10} className="inline mr-1" />}
+                            <span>{nextStatus}</span>
                           </button>
                         ))}
                         {STATUS_TRANSITIONS[appt.status].length === 0 && (
-                          <span className="text-[10px]" style={{ color: 'var(--color-ink-muted)' }}>—</span>
+                          <span className="text-[10px] font-mono text-slate-400">—</span>
                         )}
                       </div>
                     </td>

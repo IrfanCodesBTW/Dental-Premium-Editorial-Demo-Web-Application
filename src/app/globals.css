@@ -3,70 +3,80 @@
 @tailwind utilities;
 
 /* ============================================================
-   FMS Dental — Design System Tokens
-   Medical Authority + Modern Conversion Aesthetic
+   FMS Dental — Premium Redesign System
+   Luxury Editorial + Medical Precision Aesthetic
    ============================================================ */
 
 @layer base {
   :root {
-    /* Color System — OKLCH anchored */
-    --color-bg: oklch(0.985 0.003 240);
-    --color-bg-alt: oklch(0.97 0.005 235);
-    --color-surface: oklch(1 0 0);
-    --color-surface-raised: oklch(0.98 0.004 240);
+    /* Color System — OKLCH Anchored (Desaturated Spruce, Warm Neutrals) */
+    --color-bg: oklch(0.99 0.003 170);         /* Warm Soft Off-White */
+    --color-bg-alt: oklch(0.975 0.004 170);     /* Soft Warm Gray */
+    --color-surface: oklch(1 0 0);              /* Pure White */
+    --color-surface-raised: oklch(0.985 0.003 170);
 
-    --color-primary: oklch(0.42 0.16 240);
-    --color-primary-hover: oklch(0.35 0.18 240);
-    --color-primary-light: oklch(0.92 0.04 240);
-    --color-primary-muted: oklch(0.96 0.02 240);
+    /* Desaturated Luxury Spruce Accent */
+    --color-primary: oklch(0.35 0.065 170);      /* Spruce Teal */
+    --color-primary-hover: oklch(0.28 0.06 170);
+    --color-primary-light: oklch(0.94 0.015 170);
+    --color-primary-muted: oklch(0.97 0.008 170);
 
-    --color-accent: oklch(0.52 0.14 170);
-    --color-accent-hover: oklch(0.45 0.16 170);
-    --color-accent-light: oklch(0.93 0.04 170);
+    --color-accent: oklch(0.48 0.08 170);       /* Soft Teal */
+    --color-accent-hover: oklch(0.40 0.07 170);
+    --color-accent-light: oklch(0.95 0.015 170);
 
-    --color-gold: oklch(0.68 0.1 75);
-    --color-gold-light: oklch(0.95 0.03 75);
+    --color-gold: oklch(0.72 0.05 85);          /* Muted Gold */
+    --color-gold-light: oklch(0.96 0.01 85);
 
-    --color-ink: oklch(0.18 0.015 240);
-    --color-ink-secondary: oklch(0.38 0.01 240);
-    --color-ink-muted: oklch(0.55 0.008 240);
-    --color-ink-placeholder: oklch(0.70 0.005 240);
+    /* Elegant Editorial Typography Inks */
+    --color-ink: oklch(0.18 0.008 170);          /* Spruce Charcoal */
+    --color-ink-secondary: oklch(0.36 0.006 170);
+    --color-ink-muted: oklch(0.52 0.004 170);
+    --color-ink-placeholder: oklch(0.72 0.002 170);
 
-    --color-border: oklch(0.88 0.006 240);
-    --color-border-strong: oklch(0.78 0.01 240);
+    /* Clean Dividers */
+    --color-border: oklch(0.91 0.003 170);       /* Desaturated Slate Border */
+    --color-border-strong: oklch(0.82 0.005 170);
 
-    --color-success: oklch(0.52 0.15 155);
-    --color-success-light: oklch(0.94 0.04 155);
-    --color-error: oklch(0.52 0.2 25);
-    --color-error-light: oklch(0.95 0.04 25);
+    --color-success: oklch(0.55 0.09 150);
+    --color-success-light: oklch(0.96 0.01 150);
+    --color-error: oklch(0.52 0.12 25);
+    --color-error-light: oklch(0.96 0.01 25);
 
-    /* Typography Scale */
-    --font-display: 'Outfit', system-ui, sans-serif;
-    --font-body: 'DM Sans', system-ui, sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
+    /* Typography Scale mapped to Next.js Fonts */
+    --font-display: var(--font-outfit), system-ui, sans-serif;
+    --font-body: var(--font-dm-sans), system-ui, sans-serif;
+    --font-mono: var(--font-jetbrains-mono), monospace;
 
-    /* Spacing Rhythm */
-    --section-py: 5rem;
-    --section-py-lg: 7rem;
+    /* Spacing */
+    --section-py: 6rem;
+    --section-py-lg: 8rem;
 
-    /* Motion */
+    /* Transitions & Springs */
     --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+    --spring-physics: cubic-bezier(0.34, 1.56, 0.64, 1);
 
-    /* Shadows — tinted to primary hue */
-    --shadow-card: 0 2px 8px -2px oklch(0.42 0.16 240 / 0.08), 0 1px 3px -1px oklch(0.42 0.16 240 / 0.06);
-    --shadow-card-hover: 0 8px 24px -4px oklch(0.42 0.16 240 / 0.14), 0 2px 8px -2px oklch(0.42 0.16 240 / 0.08);
-    --shadow-nav: 0 1px 0 0 var(--color-border);
+    /* Wide-spreading luxury shadows */
+    --shadow-card: 0 10px 30px -10px oklch(0.18 0.008 170 / 0.03), 0 1px 3px -1px oklch(0.18 0.008 170 / 0.02);
+    --shadow-card-hover: 0 30px 60px -15px oklch(0.18 0.008 170 / 0.08), 0 3px 10px -2px oklch(0.18 0.008 170 / 0.03);
+    --shadow-nav: 0 12px 40px -12px oklch(0.18 0.008 170 / 0.06), 0 1px 0 0 oklch(0.18 0.008 170 / 0.05);
   }
 
   * {
     box-sizing: border-box;
+    cursor: default;
+  }
+
+  /* Make sure interactive elements show default/pointers correctly */
+  a, button, select, input[type="submit"], [role="button"], .pill {
+    cursor: pointer;
   }
 
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: var(--color-bg);
   }
 
   body {
@@ -79,9 +89,9 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
-    font-weight: 600;
+    font-weight: 500;
     line-height: 1.15;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.03em;
     color: var(--color-ink);
     text-wrap: balance;
   }
@@ -104,76 +114,94 @@
 @layer components {
   /* ─── Container ───────────────────────────────────────────── */
   .container-fms {
-    @apply mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8;
+    @apply mx-auto w-full max-w-[1340px] px-6 sm:px-8 lg:px-12;
   }
 
   /* ─── Section ─────────────────────────────────────────────── */
   .section {
-    @apply py-16 lg:py-24;
+    @apply py-20 lg:py-28;
   }
 
   /* ─── Section Header ──────────────────────────────────────── */
   .section-label {
-    @apply text-xs font-semibold uppercase tracking-[0.12em] mb-3;
-    color: var(--color-accent);
+    @apply text-xs font-semibold uppercase tracking-[0.16em] mb-4 inline-block;
+    color: var(--color-primary);
   }
 
   .section-title {
-    @apply text-3xl sm:text-4xl font-semibold mb-4;
+    @apply text-3xl sm:text-5xl font-medium mb-5 leading-[1.1];
     font-family: var(--font-display);
-    letter-spacing: -0.03em;
+    letter-spacing: -0.04em;
+    color: var(--color-ink);
   }
 
   .section-subtitle {
-    @apply text-base leading-relaxed;
+    @apply text-base leading-relaxed mb-8;
     color: var(--color-ink-muted);
-    max-width: 52ch;
+    max-width: 58ch;
   }
 
-  /* ─── Buttons ─────────────────────────────────────────────── */
+  /* ─── Material Classes ────────────────────────────────────── */
+  .liquid-glass {
+    background-color: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(16px) saturate(120%);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), var(--shadow-nav);
+  }
+
+  /* ─── Buttons (Magnetic Physics + Tactical Response) ──────── */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-medium text-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+    @apply inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full font-medium text-xs tracking-wide transition-all duration-300 select-none;
     background-color: var(--color-primary);
     color: white;
     font-family: var(--font-display);
-    transition-timing-function: var(--ease-out-expo);
+    text-transform: uppercase;
+    box-shadow: 0 4px 12px oklch(0.35 0.065 170 / 0.15);
   }
   .btn-primary:hover {
     background-color: var(--color-primary-hover);
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px oklch(0.35 0.065 170 / 0.25);
   }
   .btn-primary:active {
-    transform: translateY(0) scale(0.98);
+    transform: translateY(0) scale(0.97);
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-medium text-sm transition-all duration-200 border focus-visible:outline-none focus-visible:ring-2;
-    border-color: var(--color-border-strong);
+    @apply inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full font-medium text-xs tracking-wide transition-all duration-300 border select-none;
+    border-color: var(--color-border);
     color: var(--color-ink);
-    background-color: white;
+    background-color: var(--color-surface);
     font-family: var(--font-display);
+    text-transform: uppercase;
   }
   .btn-secondary:hover {
     border-color: var(--color-primary);
     color: var(--color-primary);
     background-color: var(--color-primary-muted);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+  }
+  .btn-secondary:active {
+    transform: translateY(0) scale(0.97);
   }
 
   .btn-accent {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-medium text-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2;
+    @apply inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full font-medium text-xs tracking-wide transition-all duration-300 select-none;
     background-color: var(--color-accent);
     color: white;
     font-family: var(--font-display);
+    text-transform: uppercase;
   }
   .btn-accent:hover {
     background-color: var(--color-accent-hover);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+  }
+  .btn-accent:active {
+    transform: translateY(0) scale(0.97);
   }
 
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 focus-visible:outline-none;
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full font-medium text-xs tracking-wide transition-all duration-300 select-none;
     color: var(--color-ink-secondary);
   }
   .btn-ghost:hover {
@@ -181,59 +209,56 @@
     color: var(--color-primary);
   }
 
-  /* ─── Cards ───────────────────────────────────────────────── */
+  /* ─── Premium Cards (Materiality + Spotlight Hover) ───────── */
   .card {
-    @apply rounded-xl border bg-white;
+    @apply rounded-2xl border bg-white overflow-hidden;
     border-color: var(--color-border);
     box-shadow: var(--shadow-card);
-    transition: box-shadow 0.25s var(--ease-out-expo), transform 0.25s var(--ease-out-expo);
+    transition: box-shadow 0.4s var(--ease-out-expo), transform 0.4s var(--ease-out-expo), border-color 0.4s var(--ease-out-expo);
   }
   .card:hover {
     box-shadow: var(--shadow-card-hover);
-    transform: translateY(-3px);
+    border-color: var(--color-primary-light);
   }
 
   /* ─── Form Elements ───────────────────────────────────────── */
   .form-label {
-    @apply block text-sm font-medium mb-1.5;
-    color: var(--color-ink);
+    @apply block text-xs font-semibold uppercase tracking-wider mb-2;
+    color: var(--color-ink-secondary);
     font-family: var(--font-display);
   }
 
   .form-input {
-    @apply block w-full rounded-lg border px-4 py-2.5 text-sm transition-all duration-150 outline-none;
+    @apply block w-full rounded-xl border px-4 py-3 text-sm transition-all duration-300 outline-none bg-white;
     border-color: var(--color-border);
     color: var(--color-ink);
-    background-color: white;
     font-family: var(--font-body);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.01);
   }
   .form-input::placeholder {
     color: var(--color-ink-placeholder);
   }
   .form-input:focus {
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px oklch(0.42 0.16 240 / 0.12);
-  }
-  .form-input:invalid:not(:placeholder-shown) {
-    border-color: var(--color-error);
+    box-shadow: 0 0 0 3px oklch(0.35 0.065 170 / 0.08);
   }
 
   .form-select {
     @apply form-input appearance-none pr-10;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-    background-position: right 0.75rem center;
+    background-position: right 1rem center;
     background-repeat: no-repeat;
     background-size: 1.25em 1.25em;
   }
 
   .form-error {
-    @apply text-xs mt-1.5;
+    @apply text-xs mt-2 font-medium flex items-center gap-1;
     color: var(--color-error);
   }
 
-  /* ─── Badge / Chip ────────────────────────────────────────── */
+  /* ─── Badges / Chips ──────────────────────────────────────── */
   .badge {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+    @apply inline-flex items-center px-3 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wider select-none;
   }
 
   .badge-primary {
@@ -260,36 +285,74 @@
     color: var(--color-success);
   }
 
-  /* ─── Treatment Pill (filter) ─────────────────────────────── */
+  /* ─── Treatment Pills (Filter) ────────────────────────────── */
   .pill {
-    @apply inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-medium border cursor-pointer transition-all duration-150 select-none;
+    @apply inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-semibold tracking-wider border transition-all duration-300 select-none uppercase;
     border-color: var(--color-border);
     color: var(--color-ink-secondary);
-    background-color: white;
+    background-color: var(--color-surface);
   }
   .pill:hover, .pill.active {
     border-color: var(--color-primary);
     color: var(--color-primary);
     background-color: var(--color-primary-muted);
+    transform: translateY(-1px);
+  }
+  .pill:active {
+    transform: translateY(0);
   }
 
-  /* ─── Stats ───────────────────────────────────────────────── */
+  /* ─── Monospace Metrics ───────────────────────────────────── */
   .stat-number {
-    font-family: var(--font-display);
+    font-family: var(--font-mono);
     font-weight: 700;
     letter-spacing: -0.04em;
     color: var(--color-primary);
   }
 
-  /* ─── Nav link ────────────────────────────────────────────── */
+  /* ─── Nav Links ───────────────────────────────────────────── */
   .nav-link {
-    @apply text-sm font-medium transition-colors duration-150 relative;
+    @apply text-xs font-medium uppercase tracking-wider transition-colors duration-300 relative px-4 py-2 rounded-full;
     color: var(--color-ink-secondary);
   }
   .nav-link:hover {
     color: var(--color-primary);
+    background-color: var(--color-primary-muted);
   }
   .nav-link.active {
     color: var(--color-primary);
+    background-color: var(--color-primary-muted);
   }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+/* Custom Animations */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 35s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
 }

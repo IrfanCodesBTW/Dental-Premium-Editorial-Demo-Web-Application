@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Outfit, DM_Sans } from 'next/font/google';
+import { Outfit, DM_Sans, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/ui/Navbar';
 import Footer from '@/components/ui/Footer';
@@ -16,6 +16,13 @@ const dmSans = DM_Sans({
   variable: '--font-dm-sans',
   display: 'swap',
   weight: ['300', '400', '500', '600'],
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-jetbrains-mono',
+  display: 'swap',
+  weight: ['400', '500', '700'],
 });
 
 export const metadata: Metadata = {
@@ -57,13 +64,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${outfit.variable} ${dmSans.variable}`}
+      className={`${outfit.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}
     >
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+         <meta name="viewport" content="width=device-width, initial-scale=1" />
+         <link rel="icon" href="/favicon.ico" />
       </head>
-      <body className="min-h-screen flex flex-col" style={{ fontFamily: 'var(--font-dm-sans), system-ui, sans-serif' }}>
+      <body className="min-h-screen flex flex-col bg-[var(--color-bg)] text-[var(--color-ink)]" style={{ fontFamily: 'var(--font-body)' }}>
         <Navbar />
         <main className="flex-1">
           {children}

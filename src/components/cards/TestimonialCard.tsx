@@ -11,40 +11,42 @@ interface TestimonialCardProps {
 export default function TestimonialCard({ testimonial }: TestimonialCardProps) {
   return (
     <motion.div
-      className="card p-6 flex flex-col h-full"
-      whileHover={{ y: -3 }}
-      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+      className="card p-6 flex flex-col h-full border border-[var(--color-border)] hover:border-slate-300"
+      whileHover={{ y: -5, scale: 1.01 }}
+      transition={{ type: 'spring', stiffness: 100, damping: 18 }}
     >
-      {/* Quote icon + stars */}
-      <div className="flex items-center justify-between mb-4">
-        <Quotes size={28} weight="fill" style={{ color: 'var(--color-primary-light)' }} />
+      {/* Review quote icon and rating */}
+      <div className="flex items-center justify-between mb-5">
+        <div className="text-[var(--color-primary-light)]">
+          <Quotes size={32} weight="fill" style={{ opacity: 0.8 }} />
+        </div>
         <div className="flex items-center gap-0.5">
           {Array.from({ length: testimonial.rating }).map((_, i) => (
-            <Star key={i} size={13} weight="fill" style={{ color: 'var(--color-gold)' }} />
+            <Star key={i} size={12} weight="fill" style={{ color: 'var(--color-gold)' }} />
           ))}
         </div>
       </div>
 
-      {/* Review text */}
-      <blockquote className="text-sm leading-relaxed flex-1 mb-5" style={{ color: 'var(--color-ink-secondary)' }}>
+      {/* Review content body */}
+      <blockquote className="text-xs leading-relaxed text-slate-600 flex-1 mb-6 italic">
         &ldquo;{testimonial.review}&rdquo;
       </blockquote>
 
-      {/* Patient info */}
-      <div className="flex items-center gap-3 pt-4 border-t" style={{ borderColor: 'var(--color-border)' }}>
-        <div className="w-10 h-10 rounded-full overflow-hidden shrink-0">
+      {/* Review patient metadata info */}
+      <div className="flex items-center gap-3 pt-4 border-t border-[var(--color-border)]">
+        <div className="w-9 h-9 rounded-full overflow-hidden shrink-0 border border-[var(--color-border-strong)] bg-slate-100">
           <img
             src={`https://picsum.photos/seed/${testimonial.image_seed}/80/80`}
             alt={testimonial.patient_name}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover grayscale brightness-95"
             loading="lazy"
           />
         </div>
         <div className="min-w-0">
-          <p className="text-sm font-semibold truncate" style={{ fontFamily: 'var(--font-display)', color: 'var(--color-ink)' }}>
+          <p className="text-xs font-semibold text-[var(--color-ink)] truncate" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.01em' }}>
             {testimonial.patient_name}
           </p>
-          <p className="text-[11px] truncate" style={{ color: 'var(--color-ink-muted)' }}>
+          <p className="text-[9px] text-slate-400 font-medium truncate mt-0.5">
             {testimonial.location} · {testimonial.treatment}
           </p>
         </div>

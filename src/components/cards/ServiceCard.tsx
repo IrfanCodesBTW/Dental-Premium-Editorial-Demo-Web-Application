@@ -14,66 +14,74 @@ export default function ServiceCard({ service }: ServiceCardProps) {
     Implants: 'var(--color-primary)',
     Cosmetic: 'var(--color-accent)',
     Orthodontics: 'var(--color-gold)',
-    Restorative: 'oklch(0.52 0.14 200)',
-    Advanced: 'oklch(0.52 0.14 280)',
-    Specialised: 'oklch(0.52 0.12 320)',
+    Restorative: 'oklch(0.52 0.08 200)',
+    Advanced: 'oklch(0.52 0.08 280)',
+    Specialised: 'oklch(0.52 0.06 320)',
   };
 
   const color = categoryColors[service.category] || 'var(--color-primary)';
 
   return (
     <motion.div
-      className="card overflow-hidden group h-full flex flex-col"
-      whileHover={{ y: -4 }}
-      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+      className="card group h-full flex flex-col border border-[var(--color-border)] hover:border-slate-300"
+      whileHover={{ y: -6, scale: 1.01 }}
+      transition={{ type: 'spring', stiffness: 100, damping: 18 }}
     >
-      {/* Image area */}
+      {/* Image container with Spruce gradient overlap */}
       <div
-        className="h-44 relative overflow-hidden"
-        style={{ backgroundColor: `${color}10` }}
+        className="h-48 relative overflow-hidden"
+        style={{ backgroundColor: `${color}08` }}
       >
         <img
           src={`https://picsum.photos/seed/${service.image_keyword}/600/350`}
           alt={service.name}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:scale-104"
           loading="lazy"
         />
-        <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom, transparent 40%, ${color}20)` }} />
+        {/* Soft luxury linear shade */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-ink)]/50 via-[var(--color-ink)]/10 to-transparent pointer-events-none" />
+        
+        {/* Desaturated category badge */}
         <span
-          className="absolute top-3 left-3 badge text-white text-[10px] font-semibold"
+          className="absolute top-4 left-4 badge text-white text-[9px] font-semibold tracking-wider uppercase py-1 px-3 rounded-full"
           style={{ backgroundColor: color }}
         >
           {service.category}
         </span>
       </div>
 
-      {/* Content */}
-      <div className="p-5 flex flex-col flex-1">
-        <h3 className="text-base font-semibold mb-2" style={{ fontFamily: 'var(--font-display)', color: 'var(--color-ink)' }}>
-          {service.name}
-        </h3>
-        <p className="text-sm leading-relaxed mb-4 flex-1" style={{ color: 'var(--color-ink-muted)' }}>
-          {service.short_description}
-        </p>
+      {/* Card body content */}
+      <div className="p-6 flex flex-col flex-1 space-y-4">
+        <div>
+          <h3 className="text-sm font-semibold mb-2 text-[var(--color-ink)]" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}>
+            {service.name}
+          </h3>
+          <p className="text-xs leading-relaxed text-slate-500 line-clamp-3">
+            {service.short_description}
+          </p>
+        </div>
 
-        {/* Ideal for bullets */}
-        <ul className="space-y-1 mb-4">
+        {/* Benefits bullets list */}
+        <ul className="space-y-1.5 pt-2 border-t border-[var(--color-border)]">
           {service.ideal_for.slice(0, 2).map((item) => (
-            <li key={item} className="flex items-start gap-1.5 text-xs" style={{ color: 'var(--color-ink-secondary)' }}>
-              <CheckCircle size={12} weight="fill" className="shrink-0 mt-0.5" style={{ color: color }} />
-              {item}
+            <li key={item} className="flex items-start gap-2 text-[10px] text-slate-600 font-medium">
+              <CheckCircle size={13} weight="fill" className="shrink-0 mt-0.5" style={{ color: color }} />
+              <span>{item}</span>
             </li>
           ))}
         </ul>
 
-        <Link
-          href={`/services/${service.id}`}
-          className="btn-secondary text-xs w-full justify-between mt-auto"
-          aria-label={`View details for ${service.name}`}
-        >
-          View Details
-          <ArrowRight size={13} />
-        </Link>
+        {/* Action button at bottom */}
+        <div className="pt-2 mt-auto">
+          <Link
+            href={`/services/${service.id}`}
+            className="btn-secondary text-[10px] font-bold tracking-widest uppercase py-3 px-5 w-full justify-between items-center group-hover:border-[var(--color-primary)] transition-all duration-300"
+            aria-label={`View details for ${service.name}`}
+          >
+            <span>View Details</span>
+            <ArrowRight size={12} className="transition-transform duration-300 group-hover:translate-x-1" />
+          </Link>
+        </div>
       </div>
     </motion.div>
   );
