@@ -10,11 +10,7 @@ interface TestimonialCardProps {
 
 export default function TestimonialCard({ testimonial }: TestimonialCardProps) {
   return (
-    <motion.div
-      className="card p-6 flex flex-col h-full border border-[var(--color-border)] hover:border-slate-300"
-      whileHover={{ y: -5, scale: 1.01 }}
-      transition={{ type: 'spring', stiffness: 100, damping: 18 }}
-    >
+    <div className="card p-6 flex flex-col h-full bg-white">
       {/* Review quote icon and rating */}
       <div className="flex items-center justify-between mb-5">
         <div className="text-[var(--color-primary-light)]">
@@ -51,6 +47,6 @@ export default function TestimonialCard({ testimonial }: TestimonialCardProps) {
           </p>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

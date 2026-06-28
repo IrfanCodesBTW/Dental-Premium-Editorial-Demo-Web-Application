@@ -11,11 +11,7 @@ interface ClinicCardProps {
 
 export default function ClinicCard({ clinic }: ClinicCardProps) {
   return (
-    <motion.div
-      className="card p-6 flex flex-col gap-5 h-full border border-[var(--color-border)] hover:border-slate-300"
-      whileHover={{ y: -5, scale: 1.01 }}
-      transition={{ type: 'spring', stiffness: 100, damping: 18 }}
-    >
+    <div className="card p-6 flex flex-col gap-5 h-full">
       {/* Clinic branch heading */}
       <div className="flex items-start justify-between gap-4">
         <div>
@@ -87,6 +83,6 @@ export default function ClinicCard({ clinic }: ClinicCardProps) {
           <span>Book Here</span>
         </Link>
       </div>
-    </motion.div>
+    </div>
   );
 }

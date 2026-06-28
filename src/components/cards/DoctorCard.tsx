@@ -16,14 +16,10 @@ export default function DoctorCard({ doctor }: DoctorCardProps) {
   });
 
   return (
-    <motion.div
-      className="card flex flex-col h-full border border-[var(--color-border)] hover:border-slate-300 bg-white"
-      whileHover={{ y: -5, scale: 1.01 }}
-      transition={{ type: 'spring', stiffness: 100, damping: 18 }}
-    >
+    <div className="card flex flex-col h-full bg-white">
       {/* Doctor profile card header */}
       <div className="flex items-center gap-4 p-6 pb-4 border-b border-[var(--color-border)] bg-[var(--color-bg-alt)]/30">
-        <div className="w-16 h-16 rounded-2xl overflow-hidden shrink-0 border border-[var(--color-border-strong)] bg-slate-100">
+        <div className="w-16 h-16 rounded-[20px] overflow-hidden shrink-0 border border-[var(--color-border-strong)] bg-slate-100">
           <img
             src={`https://picsum.photos/seed/${doctor.image_seed}/150/150`}
             alt={doctor.name}
@@ -75,6 +71,6 @@ export default function DoctorCard({ doctor }: DoctorCardProps) {
           </span>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

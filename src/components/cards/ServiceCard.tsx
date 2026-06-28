@@ -22,11 +22,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
   const color = categoryColors[service.category] || 'var(--color-primary)';
 
   return (
-    <motion.div
-      className="card group h-full flex flex-col border border-[var(--color-border)] hover:border-slate-300"
-      whileHover={{ y: -6, scale: 1.01 }}
-      transition={{ type: 'spring', stiffness: 100, damping: 18 }}
-    >
+    <div className="card group h-full flex flex-col bg-white">
       {/* Image container with Spruce gradient overlap */}
       <div
         className="h-48 relative overflow-hidden"
@@ -35,7 +31,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
         <img
           src={`https://picsum.photos/seed/${service.image_keyword}/600/350`}
           alt={service.name}
-          className="w-full h-full object-cover transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:scale-104"
+          className="w-full h-full object-cover transition-transform duration-[1400ms] ease-[var(--ease-out)] group-hover:scale-105"
           loading="lazy"
         />
         {/* Soft luxury linear shade */}
@@ -83,6 +79,6 @@ export default function ServiceCard({ service }: ServiceCardProps) {
           </Link>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

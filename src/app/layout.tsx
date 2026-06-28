@@ -1,21 +1,23 @@
 import type { Metadata } from 'next';
-import { Outfit, DM_Sans, JetBrains_Mono } from 'next/font/google';
+import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/ui/Navbar';
 import Footer from '@/components/ui/Footer';
+import SmoothScrollProvider from '@/components/providers/SmoothScrollProvider';
 
-const outfit = Outfit({
+const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
-  variable: '--font-outfit',
+  variable: '--font-cormorant',
   display: 'swap',
   weight: ['300', '400', '500', '600', '700'],
+  style: ['normal', 'italic'],
 });
 
-const dmSans = DM_Sans({
+const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-dm-sans',
+  variable: '--font-inter',
   display: 'swap',
-  weight: ['300', '400', '500', '600'],
+  weight: ['300', '400', '500', '600', '700'],
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -64,18 +66,20 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${outfit.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}
+      className={`${cormorant.variable} ${inter.variable} ${jetbrainsMono.variable}`}
     >
       <head>
          <meta name="viewport" content="width=device-width, initial-scale=1" />
          <link rel="icon" href="/favicon.ico" />
       </head>
       <body className="min-h-screen flex flex-col bg-[var(--color-bg)] text-[var(--color-ink)]" style={{ fontFamily: 'var(--font-body)' }}>
-        <Navbar />
-        <main className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        <SmoothScrollProvider>
+          <Navbar />
+          <main className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </SmoothScrollProvider>
       </body>
     </html>
   );

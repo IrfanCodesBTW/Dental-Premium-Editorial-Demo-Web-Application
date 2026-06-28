@@ -9,57 +9,61 @@
 
 @layer base {
   :root {
-    /* Color System — OKLCH Anchored (Desaturated Spruce, Warm Neutrals) */
-    --color-bg: oklch(0.99 0.003 170);         /* Warm Soft Off-White */
-    --color-bg-alt: oklch(0.975 0.004 170);     /* Soft Warm Gray */
+    /* Color System — Luxury Minimal OKLCH Anchored (Warm Ivory, Beige Stone, Walnut Wood, Sage Accent) */
+    --color-bg: oklch(0.975 0.005 85);         /* Warm Ivory Bone #F8F6F2 */
+    --color-bg-alt: oklch(0.935 0.01 85);      /* Beige Stone #EFE9E2 */
     --color-surface: oklch(1 0 0);              /* Pure White */
-    --color-surface-raised: oklch(0.985 0.003 170);
+    --color-surface-raised: oklch(0.985 0.003 85);
 
-    /* Desaturated Luxury Spruce Accent */
-    --color-primary: oklch(0.35 0.065 170);      /* Spruce Teal */
-    --color-primary-hover: oklch(0.28 0.06 170);
-    --color-primary-light: oklch(0.94 0.015 170);
-    --color-primary-muted: oklch(0.97 0.008 170);
+    /* Luxury Forest Green Brand Color */
+    --color-primary: oklch(0.42 0.04 165);      /* Deep Forest Green #355C4D */
+    --color-primary-hover: oklch(0.35 0.035 165);
+    --color-primary-light: oklch(0.95 0.01 165);
+    --color-primary-muted: oklch(0.97 0.005 165);
 
-    --color-accent: oklch(0.48 0.08 170);       /* Soft Teal */
-    --color-accent-hover: oklch(0.40 0.07 170);
-    --color-accent-light: oklch(0.95 0.015 170);
+    /* Sage Accent */
+    --color-accent: oklch(0.78 0.02 165);       /* Muted Sage #AFC2B2 */
+    --color-accent-hover: oklch(0.70 0.02 165);
+    --color-accent-light: oklch(0.96 0.01 165);
 
-    --color-gold: oklch(0.72 0.05 85);          /* Muted Gold */
+    /* Champagne Gold */
+    --color-gold: oklch(0.81 0.05 85);          /* Champagne Beige #D8C7A3 */
     --color-gold-light: oklch(0.96 0.01 85);
 
-    /* Elegant Editorial Typography Inks */
-    --color-ink: oklch(0.18 0.008 170);          /* Spruce Charcoal */
-    --color-ink-secondary: oklch(0.36 0.006 170);
-    --color-ink-muted: oklch(0.52 0.004 170);
-    --color-ink-placeholder: oklch(0.72 0.002 170);
+    /* Luxury Editorial Typography Inks */
+    --color-ink: oklch(0.18 0.005 85);          /* Matte Black / Charcoal #1F1F1F */
+    --color-ink-secondary: oklch(0.45 0.005 85); /* #5F5F5F */
+    --color-ink-muted: oklch(0.62 0.005 85);     /* #8C8C8C */
+    --color-ink-placeholder: oklch(0.72 0.005 85);
 
     /* Clean Dividers */
-    --color-border: oklch(0.91 0.003 170);       /* Desaturated Slate Border */
-    --color-border-strong: oklch(0.82 0.005 170);
+    --color-border: oklch(0.92 0.005 85);       /* Desaturated Warm Slate Border */
+    --color-border-strong: oklch(0.82 0.005 85);
 
-    --color-success: oklch(0.55 0.09 150);
+    --color-success: oklch(0.58 0.06 150);      /* #5B8A63 */
     --color-success-light: oklch(0.96 0.01 150);
-    --color-error: oklch(0.52 0.12 25);
-    --color-error-light: oklch(0.96 0.01 25);
+    --color-error: oklch(0.55 0.08 35);         /* #B56A58 */
+    --color-error-light: oklch(0.96 0.01 35);
 
     /* Typography Scale mapped to Next.js Fonts */
-    --font-display: var(--font-outfit), system-ui, sans-serif;
-    --font-body: var(--font-dm-sans), system-ui, sans-serif;
+    --font-display: var(--font-cormorant), Georgia, serif;
+    --font-body: var(--font-inter), system-ui, sans-serif;
     --font-mono: var(--font-jetbrains-mono), monospace;
 
     /* Spacing */
     --section-py: 6rem;
     --section-py-lg: 8rem;
 
-    /* Transitions & Springs */
+    /* Custom Premium Easing Curves (Emil Kowalski) */
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
     --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
     --spring-physics: cubic-bezier(0.34, 1.56, 0.64, 1);
 
     /* Wide-spreading luxury shadows */
-    --shadow-card: 0 10px 30px -10px oklch(0.18 0.008 170 / 0.03), 0 1px 3px -1px oklch(0.18 0.008 170 / 0.02);
-    --shadow-card-hover: 0 30px 60px -15px oklch(0.18 0.008 170 / 0.08), 0 3px 10px -2px oklch(0.18 0.008 170 / 0.03);
-    --shadow-nav: 0 12px 40px -12px oklch(0.18 0.008 170 / 0.06), 0 1px 0 0 oklch(0.18 0.008 170 / 0.05);
+    --shadow-card: 0 20px 60px oklch(0.18 0.005 85 / 0.04);
+    --shadow-card-hover: 0 30px 80px oklch(0.18 0.005 85 / 0.08);
+    --shadow-nav: 0 12px 40px -12px oklch(0.18 0.005 85 / 0.06), 0 1px 0 0 oklch(0.18 0.005 85 / 0.05);
   }
 
   * {
@@ -151,53 +155,55 @@
 
   /* ─── Buttons (Magnetic Physics + Tactical Response) ──────── */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full font-medium text-xs tracking-wide transition-all duration-300 select-none;
+    @apply inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full font-medium text-xs tracking-wide select-none;
     background-color: var(--color-primary);
     color: white;
     font-family: var(--font-display);
     text-transform: uppercase;
-    box-shadow: 0 4px 12px oklch(0.35 0.065 170 / 0.15);
+    transition: transform 160ms var(--ease-out), background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
   }
   .btn-primary:hover {
     background-color: var(--color-primary-hover);
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px oklch(0.35 0.065 170 / 0.25);
+    box-shadow: 0 8px 20px oklch(0.42 0.04 165 / 0.15);
   }
   .btn-primary:active {
-    transform: translateY(0) scale(0.97);
+    transform: translateY(0) scale(0.97) !important;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full font-medium text-xs tracking-wide transition-all duration-300 border select-none;
+    @apply inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full font-medium text-xs tracking-wide border select-none;
     border-color: var(--color-border);
     color: var(--color-ink);
     background-color: var(--color-surface);
     font-family: var(--font-display);
     text-transform: uppercase;
+    transition: transform 160ms var(--ease-out), background-color 160ms ease, border-color 160ms ease, color 160ms ease;
   }
   .btn-secondary:hover {
     border-color: var(--color-primary);
     color: var(--color-primary);
-    background-color: var(--color-primary-muted);
+    background-color: var(--color-bg-alt);
     transform: translateY(-2px);
   }
   .btn-secondary:active {
-    transform: translateY(0) scale(0.97);
+    transform: translateY(0) scale(0.97) !important;
   }
 
   .btn-accent {
-    @apply inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full font-medium text-xs tracking-wide transition-all duration-300 select-none;
-    background-color: var(--color-accent);
+    @apply inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full font-medium text-xs tracking-wide select-none;
+    background-color: var(--color-primary);
     color: white;
     font-family: var(--font-display);
     text-transform: uppercase;
+    transition: transform 160ms var(--ease-out), background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
   }
   .btn-accent:hover {
-    background-color: var(--color-accent-hover);
+    background-color: var(--color-primary-hover);
     transform: translateY(-2px);
   }
   .btn-accent:active {
-    transform: translateY(0) scale(0.97);
+    transform: translateY(0) scale(0.97) !important;
   }
 
   .btn-ghost {
@@ -211,14 +217,14 @@
 
   /* ─── Premium Cards (Materiality + Spotlight Hover) ───────── */
   .card {
-    @apply rounded-2xl border bg-white overflow-hidden;
-    border-color: var(--color-border);
-    box-shadow: var(--shadow-card);
-    transition: box-shadow 0.4s var(--ease-out-expo), transform 0.4s var(--ease-out-expo), border-color 0.4s var(--ease-out-expo);
+    @apply rounded-[18px] bg-white overflow-hidden;
+    border: 1px solid var(--color-border);
+    transition: transform 250ms var(--ease-out), border-color 250ms var(--ease-out), box-shadow 250ms var(--ease-out);
   }
   .card:hover {
-    box-shadow: var(--shadow-card-hover);
-    border-color: var(--color-primary-light);
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-card);
+    transform: translateY(-2px);
   }
 
   /* ─── Form Elements ───────────────────────────────────────── */
@@ -229,7 +235,7 @@
   }
 
   .form-input {
-    @apply block w-full rounded-xl border px-4 py-3 text-sm transition-all duration-300 outline-none bg-white;
+    @apply block w-full rounded-[16px] border px-4 py-3 text-sm transition-all duration-300 outline-none bg-white;
     border-color: var(--color-border);
     color: var(--color-ink);
     font-family: var(--font-body);
@@ -240,7 +246,7 @@
   }
   .form-input:focus {
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px oklch(0.35 0.065 170 / 0.08);
+    box-shadow: 0 0 0 3.5px oklch(0.78 0.02 165 / 0.25);
   }
 
   .form-select {
@@ -355,4 +361,56 @@
 }
 .animate-marquee:hover {
   animation-play-state: paused;
+}
+
+/* Lenis Smooth Scroll Configuration */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Cinematic layout utilities */
+.cinematic-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.panel-pin {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Image reveal animation sequence (Blur 12px -> 2px -> 0, Scale 1.04 -> 1, Opacity 0 -> 1) */
+.image-reveal {
+  filter: blur(12px);
+  transform: scale(1.04) translateZ(0);
+  opacity: 0;
+  transition: filter 1400ms var(--ease-out), transform 1400ms var(--ease-out), opacity 1400ms var(--ease-out);
+}
+.image-reveal.revealed {
+  filter: blur(0px);
+  transform: scale(1) translateZ(0);
+  opacity: 1;
 }
