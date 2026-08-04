@@ -82,7 +82,7 @@ export default function ClinicWalkthrough() {
         </div>
 
         {/* Floating Controls / Description Box */}
-        <div className="absolute bottom-20 left-6 sm:left-12 lg:left-24 z-20 max-w-[400px]">
+        <div className="absolute bottom-20 left-6 sm:left-12 lg:left-24 z-20 w-[calc(100vw-3rem)] sm:w-[380px] bg-black/35 backdrop-blur-md rounded-2xl px-6 py-5 border border-white/5 shadow-xl">
           <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
             Architectural Walkthrough
           </span>

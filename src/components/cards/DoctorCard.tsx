@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { GraduationCap, Stethoscope } from '@phosphor-icons/react';
 import { Doctor } from '@/types';
@@ -10,6 +11,17 @@ interface DoctorCardProps {
 }
 
 export default function DoctorCard({ doctor }: DoctorCardProps) {
+  const [imageError, setImageError] = useState(!doctor.image_url);
+
+  const getInitials = (name: string) => {
+    const cleanName = name.replace(/^Dr\.\s+/i, '');
+    const parts = cleanName.split(/\s+/);
+    if (parts.length >= 2) {
+      return (parts[0].charAt(0) + parts[1].charAt(0)).toUpperCase();
+    }
+    return parts[0].charAt(0).toUpperCase();
+  };
+
   const clinicNames = doctor.clinic_ids.map((id) => {
     const clinic = fmsData.clinics_and_locations.find((c) => c.id === id);
     return clinic?.area || id;
@@ -19,14 +31,21 @@ export default function DoctorCard({ doctor }: DoctorCardProps) {
     <div className="card flex flex-col h-full bg-white">
       {/* Doctor profile card header */}
       <div className="flex items-center gap-4 p-6 pb-4 border-b border-[var(--color-border)] bg-[var(--color-bg-alt)]/30">
-        <div className="w-16 h-16 rounded-[20px] overflow-hidden shrink-0 border border-[var(--color-border-strong)] bg-slate-100">
-          <img
-            src={`https://picsum.photos/seed/${doctor.image_seed}/150/150`}
-            alt={doctor.name}
-            className="w-full h-full object-cover grayscale brightness-95 contrast-105 transition-all duration-500 hover:grayscale-0"
-            loading="lazy"
-          />
-        </div>
+        {imageError ? (
+          <div className="w-16 h-16 rounded-[20px] shrink-0 flex items-center justify-center text-[var(--color-primary)] font-serif font-medium text-lg tracking-wider uppercase border border-[var(--color-border-strong)] bg-[var(--color-bg-alt)] select-none">
+            {getInitials(doctor.name)}
+          </div>
+        ) : (
+          <div className="w-16 h-16 rounded-[20px] overflow-hidden shrink-0 border border-[var(--color-border-strong)] bg-slate-100">
+            <img
+              src={doctor.image_url}
+              alt={doctor.name}
+              onError={() => setImageError(true)}
+              className="w-full h-full object-cover grayscale brightness-95 contrast-105 transition-all duration-500 hover:grayscale-0"
+              loading="lazy"
+            />
+          </div>
+        )}
         <div className="min-w-0">
           <h3 className="font-semibold text-sm leading-tight text-[var(--color-ink)] truncate" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}>
             {doctor.name}

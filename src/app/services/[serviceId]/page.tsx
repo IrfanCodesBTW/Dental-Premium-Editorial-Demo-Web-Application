@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { CheckCircle, ArrowLeft, CalendarCheck, CurrencyInr, Cpu, UserCircle } from '@phosphor-icons/react/dist/ssr';
 import fmsData from '@/lib/fmsData';
 import DoctorCard from '@/components/cards/DoctorCard';
+import ServiceBanner from '@/components/ui/ServiceBanner';
 
 interface Props {
   params: { serviceId: string };
@@ -55,14 +56,7 @@ export default function ServiceDetailPage({ params }: Props) {
           
           {/* Main Visual Banner */}
           <div className="space-y-6">
-            <div className="rounded-3xl overflow-hidden shadow-sm border border-[var(--color-border)] aspect-[21/9] bg-slate-100">
-              <img
-                src={`https://picsum.photos/seed/${service.image_keyword}/1200/525`}
-                alt={service.name}
-                className="w-full h-full object-cover grayscale brightness-95"
-                loading="eager"
-              />
-            </div>
+            <ServiceBanner imageUrl={service.image_url} name={service.name} category={service.category} />
 
             <div className="space-y-4">
               <span className="badge-primary text-[9px] py-1 px-3 rounded-full font-semibold tracking-wider uppercase inline-block">

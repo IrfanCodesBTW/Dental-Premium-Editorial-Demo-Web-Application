@@ -37,6 +37,17 @@ export default function CinematicCTA() {
         },
       });
 
+      // Fade in the transition bridge to the footer
+      gsap.to('.cta-to-footer-bridge', {
+        opacity: 1.0,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: '80% bottom',
+          end: 'bottom bottom',
+          scrub: true,
+        },
+      });
+
       // Fade in content
       gsap.fromTo(
         '.cta-content-fade',
@@ -60,7 +71,7 @@ export default function CinematicCTA() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full min-h-[90dvh] flex items-center justify-center overflow-hidden bg-black text-white py-20"
+      className="relative w-full min-h-[70dvh] flex items-center justify-center overflow-hidden bg-black text-white py-20"
     >
       {/* Background Image */}
       <div className="absolute inset-0 w-full h-full select-none pointer-events-none">
@@ -73,6 +84,8 @@ export default function CinematicCTA() {
         {/* Dynamic color overlay */}
         <div className="absolute inset-0 bg-black/45 cta-overlay transition-colors duration-500" />
         <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-primary)] via-transparent to-transparent opacity-80" />
+        {/* Transitional bridge to footer */}
+        <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-[oklch(0.12_0.005_170)] to-transparent opacity-0 cta-to-footer-bridge z-10" />
       </div>
 
       {/* Content */}

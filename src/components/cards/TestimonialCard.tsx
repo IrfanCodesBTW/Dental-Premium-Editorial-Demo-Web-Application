@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Star, Quotes } from '@phosphor-icons/react';
 import { Testimonial } from '@/types';
@@ -9,6 +10,16 @@ interface TestimonialCardProps {
 }
 
 export default function TestimonialCard({ testimonial }: TestimonialCardProps) {
+  const [imageError, setImageError] = useState(!testimonial.image_url);
+
+  const getInitials = (name: string) => {
+    const parts = name.split(/\s+/);
+    if (parts.length >= 2) {
+      return (parts[0].charAt(0) + parts[1].charAt(0)).toUpperCase();
+    }
+    return parts[0].charAt(0).toUpperCase();
+  };
+
   return (
     <div className="card p-6 flex flex-col h-full bg-white">
       {/* Review quote icon and rating */}
@@ -30,14 +41,21 @@ export default function TestimonialCard({ testimonial }: TestimonialCardProps) {
 
       {/* Review patient metadata info */}
       <div className="flex items-center gap-3 pt-4 border-t border-[var(--color-border)]">
-        <div className="w-9 h-9 rounded-full overflow-hidden shrink-0 border border-[var(--color-border-strong)] bg-slate-100">
-          <img
-            src={`https://picsum.photos/seed/${testimonial.image_seed}/80/80`}
-            alt={testimonial.patient_name}
-            className="w-full h-full object-cover grayscale brightness-95"
-            loading="lazy"
-          />
-        </div>
+        {imageError ? (
+          <div className="w-9 h-9 rounded-full shrink-0 flex items-center justify-center text-[var(--color-primary)] font-serif font-semibold text-xs tracking-wider uppercase border border-[var(--color-border-strong)] bg-[var(--color-bg-alt)] select-none">
+            {getInitials(testimonial.patient_name)}
+          </div>
+        ) : (
+          <div className="w-9 h-9 rounded-full overflow-hidden shrink-0 border border-[var(--color-border-strong)] bg-slate-100">
+            <img
+              src={testimonial.image_url}
+              alt={testimonial.patient_name}
+              onError={() => setImageError(true)}
+              className="w-full h-full object-cover grayscale brightness-95"
+              loading="lazy"
+            />
+          </div>
+        )}
         <div className="min-w-0">
           <p className="text-xs font-semibold text-[var(--color-ink)] truncate" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.01em' }}>
             {testimonial.patient_name}

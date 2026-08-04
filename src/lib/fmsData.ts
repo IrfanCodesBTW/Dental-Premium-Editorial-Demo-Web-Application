@@ -26,6 +26,7 @@ const fmsData: FMSData = {
       related_doctor_ids: ['dr-pradeep-sharma', 'dr-ramesh-babu'],
       pricing_insight_id: 'pi-dental-implants',
       image_keyword: 'dental-implant',
+      image_url: '/images/services/dental-implants.jpg',
     },
     {
       id: 'smile-design',
@@ -51,6 +52,7 @@ const fmsData: FMSData = {
       related_doctor_ids: ['dr-kavitha-reddy', 'dr-pradeep-sharma'],
       pricing_insight_id: 'pi-smile-design',
       image_keyword: 'smile-makeover',
+      image_url: '/images/services/smile-design.jpg',
     },
     {
       id: 'invisalign-aligners',
@@ -76,6 +78,7 @@ const fmsData: FMSData = {
       related_doctor_ids: ['dr-anjali-mehta', 'dr-kavitha-reddy'],
       pricing_insight_id: 'pi-aligners',
       image_keyword: 'clear-aligners',
+      image_url: '/images/services/invisalign-aligners.jpg',
     },
     {
       id: 'root-canal-treatment',
@@ -100,6 +103,7 @@ const fmsData: FMSData = {
       related_technology_ids: ['dental-microscope', 'apex-locator'],
       related_doctor_ids: ['dr-ramesh-babu'],
       image_keyword: 'root-canal',
+      image_url: '/images/services/root-canal-treatment.jpg',
     },
     {
       id: 'laser-dentistry',
@@ -124,6 +128,7 @@ const fmsData: FMSData = {
       related_technology_ids: ['diode-laser', 'er-yag-laser'],
       related_doctor_ids: ['dr-kavitha-reddy'],
       image_keyword: 'laser-dentistry',
+      image_url: '/images/services/laser-dentistry.jpg',
     },
     {
       id: 'full-mouth-rehabilitation',
@@ -148,6 +153,7 @@ const fmsData: FMSData = {
       related_technology_ids: ['cbct-scanner', 'cad-cam', 'digital-smile-design'],
       related_doctor_ids: ['dr-pradeep-sharma', 'dr-ramesh-babu', 'dr-anjali-mehta'],
       image_keyword: 'full-mouth-rehabilitation',
+      image_url: '/images/services/full-mouth-rehabilitation.jpg',
     },
     {
       id: 'teeth-whitening',
@@ -173,6 +179,7 @@ const fmsData: FMSData = {
       related_doctor_ids: ['dr-kavitha-reddy'],
       pricing_insight_id: 'pi-whitening',
       image_keyword: 'teeth-whitening',
+      image_url: '/images/services/teeth-whitening.jpg',
     },
     {
       id: 'porcelain-veneers',
@@ -198,6 +205,7 @@ const fmsData: FMSData = {
       related_doctor_ids: ['dr-kavitha-reddy', 'dr-pradeep-sharma'],
       pricing_insight_id: 'pi-veneers',
       image_keyword: 'porcelain-veneers',
+      image_url: '/images/services/porcelain-veneers.jpg',
     },
     {
       id: 'tmj-treatment',
@@ -222,6 +230,7 @@ const fmsData: FMSData = {
       related_technology_ids: ['jaw-tracker', 'cbct-scanner'],
       related_doctor_ids: ['dr-pradeep-sharma'],
       image_keyword: 'tmj-jaw-pain',
+      image_url: '/images/services/tmj-treatment.jpg',
     },
     {
       id: 'pediatric-dentistry',
@@ -246,6 +255,7 @@ const fmsData: FMSData = {
       related_technology_ids: ['digital-x-ray'],
       related_doctor_ids: ['dr-sunita-verma'],
       image_keyword: 'pediatric-dentistry',
+      image_url: '/images/services/pediatric-dentistry.jpg',
     },
   ],
 
@@ -332,6 +342,7 @@ const fmsData: FMSData = {
       bio: 'Dr. Pradeep Sharma is a fellowship-trained implantologist with over 22 years of experience and 15,000+ successful implant procedures. He trained at NYU College of Dentistry and holds an MDS in Oral Surgery. Known for complex full-arch rehabilitations and All-on-4 procedures.',
       image_seed: 'pradeep-sharma-dentist',
       qualifications: ['BDS, Osmania University', 'MDS – Oral Surgery, AIIMS Delhi', 'Fellowship in Implantology, NYU'],
+      image_url: '/images/doctors/dr-pradeep-sharma.jpg',
     },
     {
       id: 'dr-kavitha-reddy',
@@ -343,6 +354,7 @@ const fmsData: FMSData = {
       bio: 'Dr. Kavitha Reddy is one of Hyderabad\'s most sought-after cosmetic dentists, specialising in digital smile design and smile makeovers. She is a certified Zoom! Whitening provider and has completed advanced training in aesthetic dentistry at the Eastman Dental Institute, London.',
       image_seed: 'kavitha-reddy-dentist',
       qualifications: ['BDS, Kakatiya University', 'MDS – Conservative Dentistry', 'Advanced Aesthetics, Eastman Dental Institute London'],
+      image_url: '/images/doctors/dr-kavitha-reddy.jpg',
     },
     {
       id: 'dr-anjali-mehta',
@@ -354,6 +366,7 @@ const fmsData: FMSData = {
       bio: 'Dr. Anjali Mehta is a Diamond Invisalign provider and has completed over 800 aligner cases. Her expertise spans from simple crowding corrections to complex skeletal discrepancy cases. She completed her MDS from NIMHANS and has additional training in SureSmile and OrthoCAD.',
       image_seed: 'anjali-mehta-ortho',
       qualifications: ['BDS, Rajiv Gandhi University', 'MDS – Orthodontics', 'Diamond Invisalign Provider Certification'],
+      image_url: '/images/doctors/dr-anjali-mehta.jpg',
     },
     {
       id: 'dr-ramesh-babu',
@@ -365,6 +378,7 @@ const fmsData: FMSData = {
       bio: 'Dr. Ramesh Babu is a highly experienced endodontist known for painless single-sitting root canal procedures using the latest rotary systems. He is one of the few dentists in Hyderabad trained in microscope-assisted endodontics, ensuring the highest precision in complex cases.',
       image_seed: 'ramesh-babu-endo',
       qualifications: ['BDS, NTR Health University', 'MDS – Conservative Dentistry & Endodontics', 'Microscope Endodontics Certification, WaveOne Gold'],
+      image_url: '/images/doctors/dr-ramesh-babu.jpg',
     },
     {
       id: 'dr-sunita-verma',
@@ -376,6 +390,7 @@ const fmsData: FMSData = {
       bio: 'Dr. Sunita Verma is passionate about creating positive first dental experiences for children. With 11 years of specialised paediatric dentistry practice, she has treated thousands of children, including those with autism and special needs, using advanced behaviour management techniques.',
       image_seed: 'sunita-verma-pediatric',
       qualifications: ['BDS, Manipal University', 'MDS – Paediatric Dentistry', 'Certification in Special Needs Dentistry'],
+      image_url: '/images/doctors/dr-sunita-verma.jpg',
     },
     {
       id: 'dr-venkat-narayan',
@@ -387,6 +402,7 @@ const fmsData: FMSData = {
       bio: 'Dr. Venkat Narayan is a periodontist with extensive training in regenerative procedures. He specialises in complex bone grafting, sinus lift augmentation, and gum surgeries that create ideal foundations for implants, even in compromised cases.',
       image_seed: 'venkat-narayan-perio',
       qualifications: ['BDS, Andhra University', 'MDS – Periodontics', 'ITI Scholar – Implant Dentistry, Switzerland'],
+      image_url: '/images/doctors/dr-venkat-narayan.jpg',
     },
   ],
 
@@ -490,6 +506,7 @@ const fmsData: FMSData = {
       review: 'After losing most of my upper teeth in an accident, I was devastated. Dr. Pradeep and the FMS team gave me back my smile and my confidence in 4 months. The All-on-4 implants look completely natural. Worth every rupee.',
       date: 'February 2024',
       image_seed: 'arjun-mehrotra-patient',
+      image_url: '/images/testimonials/test-1.jpg',
     },
     {
       id: 'test-2',
@@ -500,6 +517,7 @@ const fmsData: FMSData = {
       review: 'I flew in from Dubai specifically for my smile makeover at FMS Jubilee Hills. The quality of porcelain veneers is on par with anything I have seen in Europe, and the cost was a fraction. Dr. Kavitha is a true artist.',
       date: 'January 2024',
       image_seed: 'priya-raghunathan-uae',
+      image_url: '/images/testimonials/test-2.jpg',
     },
     {
       id: 'test-3',
@@ -510,6 +528,7 @@ const fmsData: FMSData = {
       review: 'I had been avoiding the dentist for years due to fear. Dr. Ramesh made the entire root canal completely painless — I barely felt anything. The single-sitting procedure was done in 90 minutes. Wish I had come sooner.',
       date: 'March 2024',
       image_seed: 'srinivas-goud-patient',
+      image_url: '/images/testimonials/test-3.jpg',
     },
     {
       id: 'test-4',
@@ -520,6 +539,7 @@ const fmsData: FMSData = {
       review: 'FMS Dental is worth the trip from Oman. My Invisalign treatment was planned meticulously and the results after 14 months exceeded my expectations. Highly professional team, excellent English communication, and the clinic is spotlessly clean.',
       date: 'December 2023',
       image_seed: 'fatima-oman-patient',
+      image_url: '/images/testimonials/test-4.jpg',
     },
     {
       id: 'test-5',
@@ -530,6 +550,7 @@ const fmsData: FMSData = {
       review: 'My 7-year-old used to cry just at the mention of the dentist. Dr. Sunita is magical — my son actually looks forward to his appointments now. The kids zone is fantastic and the approach is so gentle.',
       date: 'April 2024',
       image_seed: 'rohan-kapoor-parent',
+      image_url: '/images/testimonials/test-5.jpg',
     },
     {
       id: 'test-6',
@@ -540,6 +561,7 @@ const fmsData: FMSData = {
       review: 'I had neglected my teeth for decades. The multi-specialist team at FMS created a comprehensive plan and restored my entire mouth. The transformation took 8 months but the result is beyond anything I imagined. Life-changing.',
       date: 'November 2023',
       image_seed: 'vijayalaxmi-secunderabad',
+      image_url: '/images/testimonials/test-6.jpg',
     },
     {
       id: 'test-7',
@@ -550,6 +572,7 @@ const fmsData: FMSData = {
       review: 'Travelled to Hyderabad for implants after my dentist in Goa quoted 3x the price. FMS\'s work quality is outstanding — the consultation, CBCT scan, and surgery were all seamlessly coordinated. Stayed at a hotel nearby and the whole trip was worth it.',
       date: 'October 2023',
       image_seed: 'james-fernandez-goa',
+      image_url: '/images/testimonials/test-7.jpg',
     },
     {
       id: 'test-8',
@@ -560,6 +583,7 @@ const fmsData: FMSData = {
       review: 'Had been struggling with bleeding gums for years. The laser gum treatment at FMS was a revelation — no stitches, minimal discomfort, and my gums are completely healthy now after just two sessions. Dr. Venkat is exceptional.',
       date: 'May 2024',
       image_seed: 'meena-krishnamurthy',
+      image_url: '/images/testimonials/test-8.jpg',
     },
   ],
 

@@ -17,6 +17,7 @@ export interface Service {
   related_doctor_ids: string[];
   pricing_insight_id?: string;
   image_keyword: string;
+  image_url?: string;
 }
 
 export interface Clinic {
@@ -43,6 +44,7 @@ export interface Doctor {
   bio: string;
   image_seed: string;
   qualifications: string[];
+  image_url?: string;
 }
 
 export interface Technology {
@@ -70,6 +72,7 @@ export interface Testimonial {
   review: string;
   date: string;
   image_seed: string;
+  image_url?: string;
 }
 
 export interface PricingInsight {

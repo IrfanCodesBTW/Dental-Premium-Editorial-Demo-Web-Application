@@ -66,49 +66,49 @@ export default function ImplantExperience() {
         </div>
 
         {/* Narrative Description Side-Panel */}
-        <div className="absolute top-1/2 -translate-y-1/2 left-6 sm:left-12 lg:left-24 z-20 max-w-[340px] pointer-events-none">
-          <div className="relative h-[120px] flex items-center">
+        <div className="absolute top-1/2 -translate-y-1/2 left-6 sm:left-12 lg:left-24 z-20 w-[340px] max-w-[calc(100vw-3rem)] pointer-events-none">
+          <div className="relative h-[120px] flex items-center w-full">
             
             {/* Step 1 */}
-            <div className="absolute step-1 space-y-2">
+            <div className="absolute step-1 space-y-2 w-full">
               <span className="font-mono text-xs text-[var(--color-gold)] font-bold">01 / MISSING TOOTH</span>
               <p className="text-sm leading-relaxed text-[var(--color-ink-secondary)]">
                 Bone structure begins to resorb without constant stimulation. Preparing socket for anatomical implant.
               </p>
             </div>
-
+ 
             {/* Step 2 */}
-            <div className="absolute step-2 space-y-2 opacity-0">
+            <div className="absolute step-2 space-y-2 opacity-0 w-full">
               <span className="font-mono text-xs text-[var(--color-gold)] font-bold">02 / IMPLANT INSERTION</span>
               <p className="text-sm leading-relaxed text-[var(--color-ink-secondary)]">
                 A bio-compatible titanium thread is placed directly inside the jawbone, acting as a synthetic root.
               </p>
             </div>
-
+ 
             {/* Step 3 */}
-            <div className="absolute step-3 space-y-2 opacity-0">
+            <div className="absolute step-3 space-y-2 opacity-0 w-full">
               <span className="font-mono text-xs text-[var(--color-gold)] font-bold">03 / ABUTMENT FIT</span>
               <p className="text-sm leading-relaxed text-[var(--color-ink-secondary)]">
                 A titanium/gold-alloy connector (abutment) is fastened securely onto the implant core.
               </p>
             </div>
-
+ 
             {/* Step 4 */}
-            <div className="absolute step-4 space-y-2 opacity-0">
+            <div className="absolute step-4 space-y-2 opacity-0 w-full">
               <span className="font-mono text-xs text-[var(--color-gold)] font-bold">04 / CROWN SEATING</span>
               <p className="text-sm leading-relaxed text-[var(--color-ink-secondary)]">
                 An individually crafted ceramic crown is lowered and cemented onto the abutment post.
               </p>
             </div>
-
+ 
             {/* Step 5 */}
-            <div className="absolute step-5 space-y-2 opacity-0">
+            <div className="absolute step-5 space-y-2 opacity-0 w-full">
               <span className="font-mono text-xs text-[var(--color-accent)] font-bold">05 / RESTORED HARMONY</span>
               <p className="text-sm leading-relaxed text-[var(--color-ink-secondary)]">
                 The bite is fully restored. The crown matches the texture, color, and function of native dentition.
               </p>
             </div>
-
+ 
           </div>
         </div>
 

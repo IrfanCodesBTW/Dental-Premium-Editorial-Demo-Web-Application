@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight, CheckCircle } from '@phosphor-icons/react';
@@ -10,6 +11,8 @@ interface ServiceCardProps {
 }
 
 export default function ServiceCard({ service }: ServiceCardProps) {
+  const [imageError, setImageError] = useState(!service.image_url);
+
   const categoryColors: Record<string, string> = {
     Implants: 'var(--color-primary)',
     Cosmetic: 'var(--color-accent)',
@@ -26,14 +29,28 @@ export default function ServiceCard({ service }: ServiceCardProps) {
       {/* Image container with Spruce gradient overlap */}
       <div
         className="h-48 relative overflow-hidden"
-        style={{ backgroundColor: `${color}08` }}
+        style={{ backgroundColor: `${color}15` }}
       >
-        <img
-          src={`https://picsum.photos/seed/${service.image_keyword}/600/350`}
-          alt={service.name}
-          className="w-full h-full object-cover transition-transform duration-[1400ms] ease-[var(--ease-out)] group-hover:scale-105"
-          loading="lazy"
-        />
+        {imageError ? (
+          <div 
+            className="w-full h-full flex items-center justify-center text-white font-display select-none transition-transform duration-[1400ms] group-hover:scale-105"
+            style={{ 
+              background: `linear-gradient(135deg, ${color} 0%, oklch(from ${color} calc(l - 0.15) c h) 100%)` 
+            }}
+          >
+            <span className="text-5xl font-light tracking-wider font-serif uppercase opacity-85">
+              {service.name.charAt(0)}
+            </span>
+          </div>
+        ) : (
+          <img
+            src={service.image_url}
+            alt={service.name}
+            onError={() => setImageError(true)}
+            className="w-full h-full object-cover transition-transform duration-[1400ms] ease-[var(--ease-out)] group-hover:scale-105"
+            loading="lazy"
+          />
+        )}
         {/* Soft luxury linear shade */}
         <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-ink)]/50 via-[var(--color-ink)]/10 to-transparent pointer-events-none" />
         

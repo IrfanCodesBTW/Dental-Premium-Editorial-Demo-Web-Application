@@ -65,7 +65,7 @@ export default function HeroSection() {
       </div>
 
       <div className="container-fms relative z-10 w-full">
-        <div className="max-w-[700px] space-y-6">
+        <div className="max-w-[700px] bg-black/35 backdrop-blur-md border border-white/10 rounded-[2rem] p-8 sm:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.5)] space-y-6">
           {/* Trust Badge */}
           <div className="hero-animate inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-slate-300 text-[10px] font-semibold uppercase tracking-wider">
             <ShieldCheck size={14} weight="fill" className="text-[var(--color-accent)]" />
@@ -74,7 +74,7 @@ export default function HeroSection() {
 
           {/* Headline */}
           <h1
-            className="hero-animate text-4xl sm:text-5xl lg:text-[5.5rem] font-medium leading-[1.05] tracking-tight"
+            className="hero-animate text-4xl sm:text-5xl lg:text-[4.5rem] font-medium leading-[1.05] tracking-tight"
             style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.035em' }}
           >
             Precisely Crafted <br />
